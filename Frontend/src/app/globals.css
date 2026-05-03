@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f4f6fb;
+  --foreground: #0f172a;
+  /* Brand: primary purple + secondary yellow — solid only (no gradients) */
+  --color-primary: #9440dd;
+  --color-secondary: #ffde59;
+  --safe-indigo: #9440dd;
+  --safe-mint: #ffde59;
+  --safe-sun: #ffde59;
+  --surface: #ffffff;
+  --surface-muted: #eef1f8;
+  --surface-elevated: #e8ecf4;
+  --border: rgba(15, 23, 42, 0.1);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@keyframes poster-shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.poster-shimmer {
+  animation: poster-shimmer 1.35s ease-in-out infinite;
+  width: 36%;
+  background-color: rgba(148, 64, 221, 0.12);
+}
+
+@keyframes accordion-down {
+  from {
+    height: 0;
+    opacity: 0.85;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+    opacity: 1;
+  }
+}
+
+@keyframes accordion-up {
+  from {
+    height: var(--radix-accordion-content-height);
+    opacity: 1;
+  }
+  to {
+    height: 0;
+    opacity: 0.85;
+  }
+}
+
+.animate-accordion-down {
+  animation: accordion-down 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.animate-accordion-up {
+  animation: accordion-up 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes choice-wiggle {
+  0%,
+  100% {
+    transform: rotate(-0.6deg) translateY(0);
+  }
+  50% {
+    transform: rotate(0.6deg) translateY(-2px);
+  }
+}
+
+.animate-choice-wiggle {
+  animation: choice-wiggle 0.55s ease-in-out infinite;
+}

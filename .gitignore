@@ -1,0 +1,17 @@
+.DS_Store
+
+# Next.js app
+Frontend/node_modules/
+Frontend/.next/
+Frontend/out/
+Frontend/.vercel
+Frontend/.env*
+Frontend/.env.local
+Frontend/npm-debug.log*
+Frontend/yarn-error.log*
+Frontend/*.tsbuildinfo
+Frontend/next-env.d.ts
+
+# Over GitHub 100 MB limit — host elsewhere or use Git LFS; keep local for dev
+videos/IMG_2388.MP4
+videos/talk to uncle sami.MP4
