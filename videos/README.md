@@ -7,4 +7,4 @@ These two files are **not in git** (they exceed GitHub’s 100 MB per-file limit
 
 `simply get the book.MP4` lives in **`Frontend/public/videos/`** (tracked in git) so Vercel and other hosts can serve it without leaving the app directory.
 
-For production, upload the large files to object storage or a CDN and point `Frontend/src/lib/content.ts` at those URLs, or use [Git LFS](https://git-lfs.github.com).
+The app loads episodes from **`/videos/...`** paths in `Frontend/src/lib/content.ts`. For production, you can upload large files to object storage or a CDN and point `content.ts` at those URLs, or use [Git LFS](https://git-lfs.github.com).

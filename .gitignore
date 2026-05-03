@@ -1,4 +1,5 @@
 .DS_Store
+.idea/
 
 # Next.js app
 Frontend/node_modules/

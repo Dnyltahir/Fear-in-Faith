@@ -16,23 +16,26 @@ type Props = {
 export function EpisodeShelfCard({ episode, thumbnailSrc, accentClass }: Props) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [preview, setPreview] = useState(false);
+  const hasVideoSrc = Boolean(episode.videoSrc?.trim());
 
   const startPreview = useCallback(() => {
+    if (!hasVideoSrc) return;
     setPreview(true);
     const v = videoRef.current;
     if (!v) return;
     void v.play().catch(() => {
       /* autoplay policies — ignore */
     });
-  }, []);
+  }, [hasVideoSrc]);
 
   const stopPreview = useCallback(() => {
+    if (!hasVideoSrc) return;
     setPreview(false);
     const v = videoRef.current;
     if (!v) return;
     v.pause();
     v.currentTime = 0;
-  }, []);
+  }, [hasVideoSrc]);
 
   return (
     <div
@@ -60,19 +63,21 @@ export function EpisodeShelfCard({ episode, thumbnailSrc, accentClass }: Props) 
             )}
             priority={false}
           />
-          <video
-            ref={videoRef}
-            className={cn(
-              "absolute inset-0 h-full w-full object-cover transition-opacity duration-300",
-              preview ? "opacity-100" : "opacity-0",
-            )}
-            src={episode.videoSrc}
-            muted
-            playsInline
-            loop
-            preload="metadata"
-            aria-hidden
-          />
+          {hasVideoSrc ? (
+            <video
+              ref={videoRef}
+              className={cn(
+                "absolute inset-0 h-full w-full object-cover transition-opacity duration-300",
+                preview ? "opacity-100" : "opacity-0",
+              )}
+              src={episode.videoSrc}
+              muted
+              playsInline
+              loop
+              preload="metadata"
+              aria-hidden
+            />
+          ) : null}
         </div>
 
         <div className="mt-5 flex flex-wrap items-center justify-between gap-3">

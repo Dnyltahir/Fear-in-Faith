@@ -11,7 +11,8 @@ const BREAK_MS = 20 * 60 * 1000;
 
 export function WatchPlayer({ episode }: { episode: WatchEpisode }) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [playing, setPlaying] = useState(true);
+  const hasVideoSrc = Boolean(episode.videoSrc?.trim());
+  const [playing, setPlaying] = useState(() => hasVideoSrc);
   const [showBreak, setShowBreak] = useState(false);
   const [showChoices, setShowChoices] = useState(false);
   const watchedMs = useRef(0);
@@ -20,10 +21,11 @@ export function WatchPlayer({ episode }: { episode: WatchEpisode }) {
     watchedMs.current = 0;
     setShowChoices(false);
     setShowBreak(false);
-    setPlaying(true);
-  }, [episode.slug]);
+    setPlaying(hasVideoSrc);
+  }, [episode.slug, hasVideoSrc]);
 
   useEffect(() => {
+    if (!hasVideoSrc) return;
     const v = videoRef.current;
     if (!v) return;
     const id = window.setInterval(() => {
@@ -37,7 +39,7 @@ export function WatchPlayer({ episode }: { episode: WatchEpisode }) {
       }
     }, 1000);
     return () => window.clearInterval(id);
-  }, [episode.slug]);
+  }, [episode.slug, hasVideoSrc]);
 
   function togglePlay() {
     const v = videoRef.current;
@@ -78,18 +80,24 @@ export function WatchPlayer({ episode }: { episode: WatchEpisode }) {
         </div>
 
         <div className="relative mt-6 overflow-hidden rounded-2xl ring-2 ring-[#9440DD]/40 shadow-xl shadow-[#9440DD]/20">
-          <video
-            key={episode.slug}
-            ref={videoRef}
-            className="aspect-video w-full bg-black object-cover"
-            src={episode.videoSrc}
-            autoPlay
-            playsInline
-            controls={false}
-            onPlay={() => setPlaying(true)}
-            onPause={() => setPlaying(false)}
-            onEnded={onVideoEnded}
-          />
+          {hasVideoSrc ? (
+            <video
+              key={episode.slug}
+              ref={videoRef}
+              className="aspect-video w-full bg-black object-cover"
+              src={episode.videoSrc}
+              autoPlay
+              playsInline
+              controls={false}
+              onPlay={() => setPlaying(true)}
+              onPause={() => setPlaying(false)}
+              onEnded={onVideoEnded}
+            />
+          ) : (
+            <div className="flex aspect-video w-full items-center justify-center bg-slate-900 px-6 text-center text-lg text-white">
+              This episode has no video URL configured yet.
+            </div>
+          )}
           <AnimatePresence>
             {showChoices && episode.afterChoices?.length ? (
               <motion.div
@@ -108,23 +116,25 @@ export function WatchPlayer({ episode }: { episode: WatchEpisode }) {
 
         <p className="mt-4 text-lg leading-relaxed text-slate-600">{episode.synopsis}</p>
 
-        <div className="mt-8 flex justify-center">
-          <button
-            type="button"
-            onClick={togglePlay}
-            className="inline-flex h-16 min-w-[12rem] items-center justify-center gap-3 rounded-2xl bg-[#9440DD] px-10 text-xl font-black text-white shadow-lg shadow-[#9440DD]/35 transition-colors hover:bg-[#7a32bd] active:scale-[0.99]"
-          >
-            {playing ? (
-              <>
-                <Pause className="size-7" aria-hidden /> Pause
-              </>
-            ) : (
-              <>
-                <Play className="size-7 fill-current" aria-hidden /> Play
-              </>
-            )}
-          </button>
-        </div>
+        {hasVideoSrc ? (
+          <div className="mt-8 flex justify-center">
+            <button
+              type="button"
+              onClick={togglePlay}
+              className="inline-flex h-16 min-w-[12rem] items-center justify-center gap-3 rounded-2xl bg-[#9440DD] px-10 text-xl font-black text-white shadow-lg shadow-[#9440DD]/35 transition-colors hover:bg-[#7a32bd] active:scale-[0.99]"
+            >
+              {playing ? (
+                <>
+                  <Pause className="size-7" aria-hidden /> Pause
+                </>
+              ) : (
+                <>
+                  <Play className="size-7 fill-current" aria-hidden /> Play
+                </>
+              )}
+            </button>
+          </div>
+        ) : null}
       </div>
 
       {showBreak ? (
@@ -149,7 +159,6 @@ export function WatchPlayer({ episode }: { episode: WatchEpisode }) {
           </div>
         </div>
       ) : null}
-
     </div>
   );
 }

@@ -11,9 +11,9 @@ const CHOICE_SECONDS = 18;
 
 function ChoiceIcon({ type }: { type: AfterChoice["icon"] }) {
   const cls =
-    "size-14 shrink-0 text-[#141109] drop-shadow-[0_1px_0_rgba(255,255,255,0.35)] sm:size-16";
-  if (type === "book") return <BookOpen className={cls} strokeWidth={2.25} aria-hidden />;
-  return <MessagesSquare className={cls} strokeWidth={2.25} aria-hidden />;
+    "size-9 shrink-0 text-[#141109] drop-shadow-[0_1px_0_rgba(255,255,255,0.35)] sm:size-10";
+  if (type === "book") return <BookOpen className={cls} strokeWidth={2} aria-hidden />;
+  return <MessagesSquare className={cls} strokeWidth={2} aria-hidden />;
 }
 
 type Props = {
@@ -53,18 +53,18 @@ export function InteractiveChoiceOverlay({ choices }: Props) {
         aria-hidden
       />
 
-      <div className="flex min-h-0 flex-1 flex-col justify-end px-3 pb-6 pt-4 sm:px-8 sm:pb-10">
+      <div className="flex min-h-0 flex-1 flex-col justify-end px-3 pb-4 pt-3 sm:px-5 sm:pb-6 sm:pt-4">
         <motion.p
           id="choice-title"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ type: "spring", stiffness: 380, damping: 28 }}
-          className="mb-6 text-center text-xl font-black tracking-tight text-white drop-shadow sm:text-2xl"
+          className="mb-3 text-center text-base font-black tracking-tight text-white drop-shadow sm:mb-4 sm:text-lg"
         >
           What happens next?
         </motion.p>
 
-        <div className="mx-auto flex w-full max-w-4xl flex-col gap-5 sm:flex-row sm:items-stretch sm:justify-center sm:gap-8">
+        <div className="mx-auto flex w-full max-w-2xl flex-col gap-3 sm:flex-row sm:items-stretch sm:justify-center sm:gap-4">
           {choices.map((choice, i) => (
             <motion.div
               key={choice.slug}
@@ -85,9 +85,9 @@ export function InteractiveChoiceOverlay({ choices }: Props) {
               <Link
                 href={`/watch/${choice.slug}`}
                 className={cn(
-                  "group flex h-full min-h-[8.5rem] flex-col items-center justify-center gap-3 rounded-sm px-5 py-6 text-center shadow-[0_8px_0_#5a3d24,0_18px_40px_rgba(0,0,0,0.45)] transition-transform active:scale-[0.98] sm:min-h-[10rem] sm:flex-row sm:justify-start sm:gap-5 sm:px-8 sm:py-7",
-                  "border-[3px] border-[#a28455] bg-[#efe4cf]",
-                  "outline-none focus-visible:ring-4 focus-visible:ring-[#FFDE59]/90",
+                  "group flex h-full min-h-[5.25rem] flex-col items-center justify-center gap-2 rounded-sm px-3 py-3 text-center shadow-[0_5px_0_#5a3d24,0_10px_24px_rgba(0,0,0,0.4)] transition-transform active:scale-[0.98] sm:min-h-[5.5rem] sm:flex-row sm:justify-start sm:gap-3 sm:px-4 sm:py-3.5",
+                  "border-2 border-[#a28455] bg-[#efe4cf]",
+                  "outline-none focus-visible:ring-2 focus-visible:ring-[#FFDE59]/90",
                   urgent && "motion-safe:animate-choice-wiggle",
                 )}
                 style={{
@@ -97,10 +97,10 @@ export function InteractiveChoiceOverlay({ choices }: Props) {
               >
                 <ChoiceIcon type={choice.icon} />
                 <div className="min-w-0 text-left sm:flex-1">
-                  <p className="text-xl font-black leading-tight text-[#141109] sm:text-2xl">
+                  <p className="text-base font-black leading-tight text-[#141109] sm:text-lg">
                     {choice.label}
                   </p>
-                  <p className="mt-1 text-lg font-semibold leading-snug text-[#3d2f20]">
+                  <p className="mt-0.5 text-sm font-semibold leading-snug text-[#3d2f20] sm:text-[0.9375rem]">
                     {choice.caption}
                   </p>
                 </div>
@@ -113,13 +113,13 @@ export function InteractiveChoiceOverlay({ choices }: Props) {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ type: "spring", stiffness: 400, damping: 28, delay: 0.35 }}
-          className="mx-auto mt-8 w-full max-w-4xl px-1"
+          className="mx-auto mt-4 w-full max-w-2xl px-1 sm:mt-5"
         >
-          <p className="mb-2 text-center text-sm font-bold uppercase tracking-[0.2em] text-[#e8dcc8]">
+          <p className="mb-1.5 text-center text-[0.65rem] font-bold uppercase tracking-[0.18em] text-[#e8dcc8] sm:text-xs">
             Choose before the trail cools
           </p>
-          <div className="rounded-lg border-[6px] border-[#4a3222] bg-[#2d1c12] p-2 shadow-[inset_0_4px_12px_rgba(0,0,0,0.65)]">
-            <div className="relative h-4 overflow-hidden rounded-sm bg-[#120b08] ring-1 ring-black/60">
+          <div className="rounded-md border-[3px] border-[#4a3222] bg-[#2d1c12] p-1.5 shadow-[inset_0_2px_8px_rgba(0,0,0,0.6)] sm:border-4 sm:p-2">
+            <div className="relative h-2.5 overflow-hidden rounded-sm bg-[#120b08] ring-1 ring-black/60 sm:h-3">
               <div
                 className="absolute inset-y-0 left-0 rounded-sm bg-[#FFDE59] transition-[width] duration-75 ease-linear"
                 style={{ width: `${timeLeftPct}%` }}
