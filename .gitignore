@@ -16,3 +16,7 @@ Frontend/next-env.d.ts
 # Over GitHub 100 MB limit — host elsewhere or use Git LFS; keep local for dev
 videos/IMG_2388.MP4
 videos/talk to uncle sami.MP4
+
+# Symlinks into repo-root `videos/` — never commit (Vercel fails: “copy to subdirectory of itself”)
+Frontend/public/videos/IMG_2388.MP4
+Frontend/public/videos/talk to uncle sami.MP4
