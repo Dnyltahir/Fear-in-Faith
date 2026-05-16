@@ -1,8 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowLeft, Pause, Play } from "lucide-react";
+import { Pause, Play } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import type { WatchEpisode } from "@/lib/content";
 import { InteractiveChoiceOverlay } from "@/components/watch/InteractiveChoiceOverlay";
@@ -61,22 +60,13 @@ export function WatchPlayer({ episode }: { episode: WatchEpisode }) {
   }
 
   return (
-    <div className="min-h-screen bg-[var(--background)] text-[18px] text-slate-900">
-      <div className="relative mx-auto max-w-5xl px-4 pb-28 pt-6 sm:px-6">
-        <div className="flex flex-wrap items-center justify-between gap-4">
-          <Link
-            href="/"
-            className="inline-flex h-12 items-center gap-2 rounded-2xl border border-slate-200 bg-white px-4 text-lg font-semibold text-slate-800 shadow-sm hover:bg-slate-50"
-          >
-            <ArrowLeft className="size-5" aria-hidden />
-            Home
-          </Link>
-          <div className="text-right">
-            <p className="text-sm font-semibold uppercase tracking-widest text-[#9440DD]">
-              IQRA
-            </p>
-            <h1 className="text-2xl font-black text-slate-900 sm:text-3xl">{episode.title}</h1>
-          </div>
+    <div className="min-h-screen text-[18px] text-slate-900">
+      <div className="relative mx-auto max-w-5xl px-4 pb-28 sm:px-6">
+        <div className="rounded-2xl border border-slate-200/90 bg-white/92 px-4 py-4 text-right shadow-sm ring-1 ring-slate-100 backdrop-blur-sm sm:px-5">
+          <p className="text-sm font-semibold uppercase tracking-widest text-[#9440DD]">
+            IQRA
+          </p>
+          <h1 className="text-2xl font-black text-slate-900 sm:text-3xl">{episode.title}</h1>
         </div>
 
         <div className="relative mt-6 overflow-hidden rounded-2xl ring-2 ring-[#9440DD]/40 shadow-xl shadow-[#9440DD]/20">

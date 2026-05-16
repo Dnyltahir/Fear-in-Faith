@@ -14,9 +14,10 @@ const PROMPTS = [
 type Props = {
   open: boolean;
   onOpenChange: (v: boolean) => void;
+  onPost?: (text: string) => void;
 };
 
-export function AskQuestionModal({ open, onOpenChange }: Props) {
+export function AskQuestionModal({ open, onOpenChange, onPost }: Props) {
   const [text, setText] = useState("");
 
   return (
@@ -98,6 +99,8 @@ export function AskQuestionModal({ open, onOpenChange }: Props) {
                   type="button"
                   disabled={text.trim().length < 6}
                   onClick={() => {
+                    const trimmed = text.trim();
+                    if (trimmed.length >= 6) onPost?.(trimmed);
                     setText("");
                     onOpenChange(false);
                   }}

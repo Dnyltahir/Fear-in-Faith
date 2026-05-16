@@ -54,7 +54,7 @@ export function DiscoveryZone() {
         </div>
       </section>
 
-      <section className="rounded-2xl border border-slate-200/80 bg-white p-4 shadow-sm shadow-slate-200/60 backdrop-blur-md sm:p-6">
+      <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm shadow-slate-200/60 sm:p-6">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <p className="text-sm font-semibold uppercase tracking-widest text-[#9440DD]">
@@ -96,7 +96,7 @@ export function DiscoveryZone() {
               🧭
             </div>
             <p className="mt-6 text-2xl font-black text-slate-900">Oops! Let&apos;s try another path!</p>
-            <p className="mt-3 max-w-md text-lg text-slate-600">
+            <p className="mt-3 max-w-md text-lg text-slate-800">
               We couldn&apos;t find that search. Try &quot;IQRA&quot;, &quot;Theodicy&quot;, or clear the box
               to see your episode.
             </p>

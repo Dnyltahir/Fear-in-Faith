@@ -90,10 +90,10 @@ export function EpisodeShelfCard({ episode, thumbnailSrc, accentClass }: Props) 
           </span>
         </div>
 
-        <p className="mt-4 text-lg leading-relaxed text-slate-600">{episode.synopsis}</p>
+        <p className="mt-4 text-lg leading-relaxed text-slate-800">{episode.synopsis}</p>
 
         <div className="mt-5 flex flex-wrap items-center gap-4">
-          <p className="text-sm font-semibold uppercase tracking-widest text-slate-500">
+          <p className="text-sm font-semibold uppercase tracking-widest text-slate-700">
             Fun meter
           </p>
           <FunMeter level={episode.funLevel} />

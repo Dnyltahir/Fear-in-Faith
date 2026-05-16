@@ -13,6 +13,15 @@
   --surface-muted: #eef1f8;
   --surface-elevated: #e8ecf4;
   --border: rgba(15, 23, 42, 0.1);
+  --site-header-height: 4rem;
+  --content-gap: 2rem;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --site-header-height: 4.75rem;
+    --content-gap: 2.5rem;
+  }
 }
 
 @theme inline {
@@ -22,8 +31,12 @@
   --font-mono: var(--font-geist-mono);
 }
 
+html {
+  min-height: 100%;
+}
+
 body {
-  background: var(--background);
+  background: transparent;
   color: var(--foreground);
   font-family: var(--font-geist-sans), system-ui, sans-serif;
 }

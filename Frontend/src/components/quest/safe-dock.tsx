@@ -12,15 +12,9 @@ export function SafeDock() {
 
   return (
     <Tabs value={tab} onValueChange={setTab} className="w-full">
-      <div className="sticky top-0 z-40 border-b border-slate-200/90 bg-white/90 py-4 shadow-sm shadow-slate-200/50 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-5xl flex-col items-stretch gap-4 px-4 sm:px-6">
-          <div className="flex justify-center px-2">
-            <h1 className="text-center text-3xl font-black tracking-tight text-[#9440DD] sm:text-4xl">
-              DAWA-HI
-            </h1>
-          </div>
-
-          <div className="relative rounded-xl bg-slate-100/95 p-1.5 ring-1 ring-slate-200/90">
+      <div className="sticky top-[var(--site-header-height)] z-40 border-b border-[#e6cf3a]/80 bg-[#FFDE59] py-3 shadow-sm">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6">
+          <div className="relative rounded-xl bg-white/55 p-1.5 ring-1 ring-[#e6cf3a]/70">
             <motion.div
               layout
               layoutId="safe-dock-pill"
@@ -53,11 +47,19 @@ export function SafeDock() {
         </div>
       </div>
 
-      <div className="mx-auto max-w-5xl px-4 pb-24 pt-6 sm:px-6">
-        <TabsContent value="discovery" forceMount className="data-[state=inactive]:hidden">
+      <div className="mx-auto max-w-5xl px-4 pb-8 pt-6 sm:px-6 sm:pb-10">
+        <TabsContent
+          value="discovery"
+          forceMount
+          className="mt-0 data-[state=inactive]:hidden"
+        >
           <DiscoveryZone />
         </TabsContent>
-        <TabsContent value="community" forceMount className="data-[state=inactive]:hidden">
+        <TabsContent
+          value="community"
+          forceMount
+          className="mt-0 data-[state=inactive]:hidden"
+        >
           <RoundTable />
         </TabsContent>
       </div>
