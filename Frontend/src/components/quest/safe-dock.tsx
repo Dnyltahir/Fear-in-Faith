@@ -17,7 +17,7 @@ export function SafeDock() {
     <Tabs value={tab} onValueChange={setTab} className="w-full">
       <div
         className={cn(
-          "fixed left-0 right-0 z-40 border-b border-[#e6cf3a]/70 bg-[#FFDE59]/95 py-3 shadow-sm backdrop-blur-sm transition-transform duration-300 ease-in-out md:py-3.5 lg:py-4",
+          "fixed left-0 right-0 z-40 border-b border-[#e6cf3a]/70 bg-[#FFDE59]/95 py-3 shadow-sm backdrop-blur-sm transition-transform duration-300 ease-in-out md:py-3.5 lg:py-4 tv:py-5",
           chromeVisible
             ? "top-[var(--site-header-height)] translate-y-0"
             : "top-[var(--site-header-height)] -translate-y-[calc(var(--site-header-height)+var(--site-dock-height))]",
@@ -40,16 +40,16 @@ export function SafeDock() {
             <TabsList className="relative z-10 flex w-full gap-1 bg-transparent p-0 ring-0 md:gap-1.5">
               <TabsTrigger
                 value="discovery"
-                className="btn-touch min-h-[2.625rem] flex-1 gap-1.5 rounded-lg px-2 py-2 text-[0.8125rem] font-semibold md:min-h-[2.875rem] md:gap-2 md:px-4 md:py-2.5 md:text-[0.9375rem] lg:min-h-[3rem] lg:text-base xl:text-lg"
+                className="btn-touch min-h-[2.625rem] flex-1 gap-1.5 rounded-lg px-2 py-2 text-[0.8125rem] font-semibold md:min-h-[2.875rem] md:gap-2 md:px-4 md:py-2.5 md:text-[0.9375rem] lg:min-h-[3rem] lg:text-base xl:min-h-[3.25rem] xl:text-lg tv:min-h-[3.75rem] tv:gap-3 tv:text-xl"
               >
-                <Tv className="size-4 shrink-0 md:size-[1.125rem] lg:size-5" aria-hidden />
+                <Tv className="size-4 shrink-0 md:size-[1.125rem] lg:size-5 xl:size-6 tv:size-7" aria-hidden />
                 <span className="truncate">Discovery Zone</span>
               </TabsTrigger>
               <TabsTrigger
                 value="community"
-                className="btn-touch min-h-[2.625rem] flex-1 gap-1.5 rounded-lg px-2 py-2 text-[0.8125rem] font-semibold md:min-h-[2.875rem] md:gap-2 md:px-4 md:py-2.5 md:text-[0.9375rem] lg:min-h-[3rem] lg:text-base xl:text-lg"
+                className="btn-touch min-h-[2.625rem] flex-1 gap-1.5 rounded-lg px-2 py-2 text-[0.8125rem] font-semibold md:min-h-[2.875rem] md:gap-2 md:px-4 md:py-2.5 md:text-[0.9375rem] lg:min-h-[3rem] lg:text-base xl:min-h-[3.25rem] xl:text-lg tv:min-h-[3.75rem] tv:gap-3 tv:text-xl"
               >
-                <MessageCircle className="size-4 shrink-0 md:size-[1.125rem] lg:size-5" aria-hidden />
+                <MessageCircle className="size-4 shrink-0 md:size-[1.125rem] lg:size-5 xl:size-6 tv:size-7" aria-hidden />
                 <span className="truncate">Round Table</span>
               </TabsTrigger>
             </TabsList>
@@ -63,7 +63,7 @@ export function SafeDock() {
         aria-hidden
       />
 
-      <div className="site-container pb-8 pt-5 sm:pb-10 md:pt-7 lg:pb-12 lg:pt-8">
+      <div className="site-container pb-8 pt-5 sm:pb-10 md:pt-7 lg:pb-12 lg:pt-8 tv:pb-14 tv:pt-10">
         <TabsContent
           value="discovery"
           forceMount

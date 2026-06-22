@@ -44,7 +44,7 @@ export function EpisodeShelfCard({ episode, thumbnailSrc, accentClass }: Props) 
       )}
     >
       <div
-        className="p-4 sm:p-5 lg:p-6"
+        className="p-4 sm:p-5 lg:p-6 xl:p-8 tv:p-10"
         onPointerEnter={startPreview}
         onPointerLeave={stopPreview}
       >
@@ -54,7 +54,7 @@ export function EpisodeShelfCard({ episode, thumbnailSrc, accentClass }: Props) 
             alt={`${episode.title} — IQRA episode artwork`}
             width={1024}
             height={1024}
-            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 512px, 672px"
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 512px, (max-width: 1920px) 672px, 960px"
             className={cn(
               "absolute inset-0 h-full w-full object-cover transition-opacity duration-300",
               preview ? "opacity-0" : "opacity-100",
@@ -96,7 +96,7 @@ export function EpisodeShelfCard({ episode, thumbnailSrc, accentClass }: Props) 
 
         <Link
           href={`/watch/${episode.slug}`}
-          className="btn-touch btn-primary mt-5 flex w-full text-[0.9375rem] md:mt-6 md:text-base"
+          className="btn-touch btn-primary mt-5 flex w-full text-[0.9375rem] md:mt-6 md:text-base lg:text-lg tv:mt-8 tv:min-h-[3.75rem] tv:text-xl"
         >
           Watch episode
         </Link>

@@ -9,7 +9,7 @@ type Props = {
 /** Responsive page shell — scales from phone → iPad → laptop → large TV. */
 export function PageContainer({ children, className }: Props) {
   return (
-    <div className={cn("site-container pb-8 pt-4 sm:pb-10 md:pt-6 lg:pb-12", className)}>
+    <div className={cn("site-container pb-8 pt-4 sm:pb-10 md:pt-6 lg:pb-12 tv:pb-14 tv:pt-8", className)}>
       {children}
     </div>
   );

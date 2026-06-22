@@ -15,7 +15,7 @@ const HIGHLIGHTS = [
 
 export function SiteFooter() {
   return (
-    <footer id="site-footer" className="relative z-20 mt-8 shrink-0 pb-8 sm:mt-10 lg:mt-12 lg:pb-10">
+    <footer id="site-footer" className="relative z-20 mt-8 shrink-0 pb-8 sm:mt-10 lg:mt-12 lg:pb-10 tv:mt-14 tv:pb-12">
       <div className="site-container">
         <div className="surface-card overflow-hidden">
           <div className="h-1 bg-[#FFDE59]" aria-hidden />
@@ -39,7 +39,7 @@ export function SiteFooter() {
                   <Link
                     key={href}
                     href={href}
-                    className="btn-touch rounded-lg border border-slate-200 bg-slate-50 px-3.5 py-1.5 text-[0.8125rem] font-semibold text-slate-700 transition-colors hover:border-[#9440DD]/35 hover:bg-purple-50 hover:text-[#9440DD] md:text-sm"
+                    className="btn-touch rounded-lg border border-slate-200 bg-slate-50 px-3.5 py-1.5 text-[0.8125rem] font-semibold text-slate-700 transition-colors hover:border-[#9440DD]/35 hover:bg-purple-50 hover:text-[#9440DD] md:text-sm lg:text-base tv:text-lg"
                   >
                     {label}
                   </Link>

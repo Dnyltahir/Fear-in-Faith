@@ -192,8 +192,9 @@ export function WatchPlayer({ episode: initialEpisode }: { episode: WatchEpisode
 
   return (
     <div className="min-h-screen text-slate-900">
-      <div className="site-container relative pb-24 pt-2 md:pb-28 lg:pb-32">
-        <div className="surface-card mb-6 text-right md:mb-8">
+      <div className="site-container relative pb-24 pt-2 md:pb-28 lg:pb-32 tv:pb-36">
+        <div className="watch-layout">
+        <div className="surface-card mb-6 text-right md:mb-8 tv:mb-10">
           <div className="surface-card__body py-4 md:py-5">
             <p className="type-label font-semibold text-[#9440DD]">IQRA</p>
             <h1 className="type-h1 font-black text-slate-900">{activeEpisode.title}</h1>
@@ -230,13 +231,13 @@ export function WatchPlayer({ episode: initialEpisode }: { episode: WatchEpisode
                 type="button"
                 onClick={() => void toggleFullscreen()}
                 className={cn(
-                  "btn-touch absolute right-3 top-3 z-10 inline-flex size-11 items-center justify-center rounded-xl bg-black/55 text-white ring-1 ring-white/20 backdrop-blur-sm transition-colors hover:bg-black/75 md:size-12 lg:rounded-2xl",
+                  "btn-touch absolute right-3 top-3 z-10 inline-flex size-11 items-center justify-center rounded-xl bg-black/55 text-white ring-1 ring-white/20 backdrop-blur-sm transition-colors hover:bg-black/75 md:size-12 lg:rounded-2xl lg:size-14 tv:size-16 tv:rounded-3xl",
                   isFullscreen && "hidden",
                   controlsClassName,
                 )}
                 aria-label="Enter fullscreen"
               >
-                <Maximize className="size-5 md:size-6" aria-hidden />
+                <Maximize className="size-5 md:size-6 lg:size-7 tv:size-8" aria-hidden />
               </button>
 
               {isFullscreen && !showChoices ? (
@@ -246,26 +247,26 @@ export function WatchPlayer({ episode: initialEpisode }: { episode: WatchEpisode
                     controlsClassName,
                   )}
                 >
-                  <div className="h-14 shrink-0 sm:h-16" aria-hidden />
+                  <div className="h-14 shrink-0 sm:h-16 lg:h-20 tv:h-24" aria-hidden />
                   <div
                     className={cn(
-                      "flex w-full items-center justify-center gap-3 bg-gradient-to-t from-black/90 via-black/65 to-transparent px-4 pb-4 pt-2 sm:gap-4 sm:pb-5 sm:pt-3",
+                      "flex w-full items-center justify-center gap-3 bg-gradient-to-t from-black/90 via-black/65 to-transparent px-4 pb-4 pt-2 sm:gap-4 sm:pb-5 sm:pt-3 lg:gap-6 lg:pb-8 lg:pt-4 tv:gap-8 tv:pb-10 tv:pt-5",
                       controlsVisible ? "pointer-events-auto" : "pointer-events-none",
                     )}
                   >
                   <button
                     type="button"
                     onClick={togglePlay}
-                    className="btn-touch inline-flex min-w-[9rem] items-center justify-center gap-2.5 rounded-xl bg-[#9440DD] px-5 py-3 text-base font-bold text-white shadow-lg shadow-[#9440DD]/30 hover:bg-[#7a32bd] sm:min-w-[10rem] sm:text-lg"
+                    className="btn-touch inline-flex min-w-[9rem] items-center justify-center gap-2.5 rounded-xl bg-[#9440DD] px-5 py-3 text-base font-bold text-white shadow-lg shadow-[#9440DD]/30 hover:bg-[#7a32bd] sm:min-w-[10rem] sm:text-lg lg:min-w-[12rem] lg:px-8 lg:py-4 lg:text-xl tv:min-w-[14rem] tv:px-10 tv:py-5 tv:text-2xl"
                   >
                     {playing ? (
                       <>
-                        <Pause className="size-5 sm:size-6" aria-hidden />
+                        <Pause className="size-5 sm:size-6 lg:size-7 tv:size-8" aria-hidden />
                         Pause
                       </>
                     ) : (
                       <>
-                        <Play className="size-5 fill-current sm:size-6" aria-hidden />
+                        <Play className="size-5 fill-current sm:size-6 lg:size-7 tv:size-8" aria-hidden />
                         Play
                       </>
                     )}
@@ -273,10 +274,10 @@ export function WatchPlayer({ episode: initialEpisode }: { episode: WatchEpisode
                   <button
                     type="button"
                     onClick={() => void toggleFullscreen()}
-                    className="btn-touch inline-flex min-w-[9rem] items-center justify-center gap-2 rounded-xl border border-white/25 bg-white/15 px-5 py-3 text-base font-semibold text-white backdrop-blur-sm hover:bg-white/25 sm:min-w-[10rem] sm:text-lg"
+                    className="btn-touch inline-flex min-w-[9rem] items-center justify-center gap-2 rounded-xl border border-white/25 bg-white/15 px-5 py-3 text-base font-semibold text-white backdrop-blur-sm hover:bg-white/25 sm:min-w-[10rem] sm:text-lg lg:min-w-[12rem] lg:px-8 lg:py-4 lg:text-xl tv:min-w-[14rem] tv:px-10 tv:py-5 tv:text-2xl"
                     aria-label="Exit fullscreen"
                   >
-                    <Minimize className="size-5 sm:size-6" aria-hidden />
+                    <Minimize className="size-5 sm:size-6 lg:size-7 tv:size-8" aria-hidden />
                     Exit full screen
                   </button>
                   </div>
@@ -307,12 +308,12 @@ export function WatchPlayer({ episode: initialEpisode }: { episode: WatchEpisode
           </AnimatePresence>
         </div>
 
-        <p className="type-body mt-4 text-white md:mt-6 lg:max-w-4xl">{activeEpisode.synopsis}</p>
+        <p className="type-body mt-4 text-white md:mt-6 lg:max-w-4xl xl:max-w-5xl tv:mt-8">{activeEpisode.synopsis}</p>
 
         {hasVideoSrc && !isFullscreen ? (
           <div
             className={cn(
-              "mt-8 flex flex-wrap items-center justify-center gap-3 md:mt-10 md:gap-4",
+              "mt-8 flex flex-wrap items-center justify-center gap-3 md:mt-10 md:gap-4 lg:mt-12 lg:gap-5 tv:mt-14",
               controlsClassName,
             )}
             onMouseMove={revealControls}
@@ -321,28 +322,29 @@ export function WatchPlayer({ episode: initialEpisode }: { episode: WatchEpisode
             <button
               type="button"
               onClick={togglePlay}
-              className="btn-touch btn-primary min-w-[11rem] gap-2.5 px-7 text-[0.9375rem] md:min-w-[12rem] md:px-9 md:text-base"
+              className="btn-touch btn-primary min-w-[11rem] gap-2.5 px-7 text-[0.9375rem] md:min-w-[12rem] md:px-9 md:text-base lg:min-w-[14rem] lg:text-lg tv:min-w-[16rem] tv:px-12 tv:text-xl"
             >
               {playing ? (
                 <>
-                  <Pause className="size-6 md:size-7" aria-hidden /> Pause
+                  <Pause className="size-6 md:size-7 lg:size-8 tv:size-9" aria-hidden /> Pause
                 </>
               ) : (
                 <>
-                  <Play className="size-6 fill-current md:size-7" aria-hidden /> Play
+                  <Play className="size-6 fill-current md:size-7 lg:size-8 tv:size-9" aria-hidden /> Play
                 </>
               )}
             </button>
             <button
               type="button"
               onClick={() => void toggleFullscreen()}
-              className="btn-touch inline-flex items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white px-6 text-base font-semibold text-slate-800 shadow-sm hover:bg-slate-50 md:text-lg lg:px-8 lg:text-xl"
+              className="btn-touch inline-flex items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white px-6 text-base font-semibold text-slate-800 shadow-sm hover:bg-slate-50 md:text-lg lg:px-8 lg:text-xl tv:min-w-[16rem] tv:px-12 tv:text-2xl"
             >
-              <Maximize className="size-5 md:size-6" aria-hidden />
+              <Maximize className="size-5 md:size-6 lg:size-7 tv:size-8" aria-hidden />
               Full screen
             </button>
           </div>
         ) : null}
+        </div>
       </div>
 
       {showBreak ? (

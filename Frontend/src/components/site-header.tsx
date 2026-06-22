@@ -14,8 +14,8 @@ const NAV = [
 
 function navClass(active: boolean) {
   return active
-    ? "btn-touch rounded-lg bg-[#9440DD] px-3.5 py-1.5 text-sm font-bold text-white shadow-sm shadow-[#9440DD]/25 md:px-4 md:text-[0.9375rem] lg:px-5 lg:text-base"
-    : "btn-touch rounded-lg px-3.5 py-1.5 text-sm font-semibold text-slate-600 transition-colors hover:bg-white hover:text-[#9440DD] md:px-4 md:text-[0.9375rem] lg:px-5 lg:text-base";
+    ? "btn-touch rounded-lg bg-[#9440DD] px-3.5 py-1.5 text-sm font-bold text-white shadow-sm shadow-[#9440DD]/25 md:px-4 md:text-[0.9375rem] lg:px-5 lg:text-base xl:px-6 xl:text-lg tv:px-7 tv:text-xl"
+    : "btn-touch rounded-lg px-3.5 py-1.5 text-sm font-semibold text-slate-600 transition-colors hover:bg-white hover:text-[#9440DD] md:px-4 md:text-[0.9375rem] lg:px-5 lg:text-base xl:px-6 xl:text-lg tv:px-7 tv:text-xl";
 }
 
 export function SiteHeader() {
@@ -42,7 +42,7 @@ export function SiteHeader() {
               width={520}
               height={128}
               priority
-              className="block h-14 w-auto max-h-14 max-w-[min(62vw,300px)] object-contain object-left sm:h-16 sm:max-h-16 sm:max-w-[340px] md:h-[4.25rem] md:max-h-[4.25rem] md:max-w-[400px] lg:h-[4.75rem] lg:max-h-[4.75rem] lg:max-w-[460px] xl:h-20 xl:max-h-20 xl:max-w-[520px] 2xl:h-[5.5rem] 2xl:max-h-[5.5rem] 2xl:max-w-[580px]"
+              className="block h-14 w-auto max-h-14 max-w-[min(62vw,300px)] object-contain object-left sm:h-16 sm:max-h-16 sm:max-w-[340px] md:h-[4.25rem] md:max-h-[4.25rem] md:max-w-[400px] lg:h-[4.75rem] lg:max-h-[4.75rem] lg:max-w-[460px] xl:h-20 xl:max-h-20 xl:max-w-[520px] 2xl:h-[5.5rem] 2xl:max-h-[5.5rem] 2xl:max-w-[580px] tv:h-24 tv:max-h-24 tv:max-w-[680px] tv-xl:h-28 tv-xl:max-h-28 tv-xl:max-w-[780px]"
             />
           </Link>
 
@@ -73,7 +73,7 @@ export function SiteHeader() {
               alt=""
               width={72}
               height={72}
-              className="block size-11 object-contain sm:size-12 md:size-14 lg:size-16 2xl:size-[4.5rem]"
+              className="block size-11 object-contain sm:size-12 md:size-14 lg:size-16 2xl:size-[4.5rem] tv:size-20 tv-xl:size-24"
             />
           </Link>
         </div>

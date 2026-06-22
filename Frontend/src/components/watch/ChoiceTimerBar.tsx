@@ -30,7 +30,7 @@ export function ChoiceTimerBar({ progressPct }: Props) {
 
   return (
     <div
-      className="relative w-full min-h-[3.75rem] sm:min-h-[4.25rem]"
+      className="relative w-full min-h-[3.75rem] sm:min-h-[4.25rem] lg:min-h-[5rem] tv:min-h-[6rem]"
       role="progressbar"
       aria-valuemin={0}
       aria-valuemax={100}
@@ -39,7 +39,7 @@ export function ChoiceTimerBar({ progressPct }: Props) {
     >
       <div
         ref={trackRef}
-        className="absolute inset-x-0 bottom-0 z-[1] h-4 w-full sm:h-5 lg:h-6"
+        className="absolute inset-x-0 bottom-0 z-[1] h-4 w-full sm:h-5 lg:h-6 xl:h-7 tv:h-8 tv-xl:h-10"
       >
         <div className="absolute inset-0 bg-[#FFDE59]" />
         <div

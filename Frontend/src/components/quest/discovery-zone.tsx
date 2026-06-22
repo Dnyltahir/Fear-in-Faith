@@ -53,7 +53,7 @@ export function DiscoveryZone() {
             width={2752}
             height={2064}
             priority
-            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1200px"
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, (max-width: 1920px) 1200px, 1600px"
             className="h-auto w-full object-cover object-center"
           />
         </div>
@@ -69,16 +69,16 @@ export function DiscoveryZone() {
                 Search by show name or episode topic.
               </p>
             </div>
-            <label className="relative block w-full shrink-0 md:max-w-sm lg:max-w-md">
+            <label className="relative block w-full shrink-0 md:max-w-sm lg:max-w-md xl:max-w-lg tv:max-w-xl">
               <Search
-                className="pointer-events-none absolute left-4 top-1/2 size-[1.125rem] -translate-y-1/2 text-[#9440DD] md:size-5"
+                className="pointer-events-none absolute left-4 top-1/2 size-[1.125rem] -translate-y-1/2 text-[#9440DD] md:size-5 lg:size-6 tv:size-7"
                 aria-hidden
               />
               <input
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
                 placeholder='Try "IQRA" or "Theodicy"'
-                className="btn-touch w-full rounded-xl border border-slate-200 bg-slate-50 pl-11 pr-4 text-[0.9375rem] text-slate-900 outline-none ring-[#9440DD]/30 placeholder:text-slate-400 focus:border-[#9440DD]/40 focus:ring-2 md:pl-12 md:text-base"
+                className="btn-touch w-full rounded-xl border border-slate-200 bg-slate-50 pl-11 pr-4 text-[0.9375rem] text-slate-900 outline-none ring-[#9440DD]/30 placeholder:text-slate-400 focus:border-[#9440DD]/40 focus:ring-2 md:pl-12 md:text-base lg:pl-14 lg:text-lg tv:min-h-[3.5rem] tv:pl-16 tv:text-xl"
               />
             </label>
           </div>
@@ -132,7 +132,7 @@ export function DiscoveryZone() {
               layout
               whileHover={{ scale: 1.015, y: -3 }}
               transition={{ type: "spring", stiffness: 380, damping: 22 }}
-              className="w-full max-w-md md:max-w-lg lg:max-w-xl"
+              className="w-full max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl tv:max-w-3xl tv-xl:max-w-4xl"
             >
               <EpisodeShelfCard
                 episode={visible}

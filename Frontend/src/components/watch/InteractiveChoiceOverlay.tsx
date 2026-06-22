@@ -10,7 +10,10 @@ import { ChoiceTimerBar } from "@/components/watch/ChoiceTimerBar";
 const CHOICE_SECONDS = 18;
 
 function ChoiceIcon({ type, className }: { type: AfterChoice["icon"]; className?: string }) {
-  const cls = cn("choice-box__icon size-9 shrink-0 sm:size-10", className);
+  const cls = cn(
+    "choice-box__icon size-9 shrink-0 sm:size-10 lg:size-11 tv:size-[3.25rem]",
+    className,
+  );
   if (type === "book") return <BookOpen className={cls} strokeWidth={2.25} aria-hidden />;
   return <MessagesSquare className={cls} strokeWidth={2.25} aria-hidden />;
 }
@@ -49,18 +52,18 @@ export function InteractiveChoiceOverlay({ choices, onSelect }: Props) {
     >
       <div className="min-h-0 flex-1" aria-hidden />
 
-      <div className="shrink-0 bg-gradient-to-t from-black/75 via-black/40 to-transparent px-3 pb-5 pt-8 sm:px-5 sm:pb-6 sm:pt-12">
+      <div className="shrink-0 bg-gradient-to-t from-black/75 via-black/40 to-transparent px-3 pb-5 pt-8 sm:px-5 sm:pb-6 sm:pt-12 lg:px-8 lg:pb-8 lg:pt-14 tv:px-12 tv:pb-10 tv:pt-16">
         <motion.p
           id="choice-title"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ type: "spring", stiffness: 380, damping: 28 }}
-          className="mb-3 text-center text-base font-black tracking-tight text-white drop-shadow sm:mb-4 sm:text-lg"
+          className="type-h3 mb-3 text-center font-black tracking-tight text-white drop-shadow sm:mb-4 lg:text-2xl tv:mb-6 tv:text-3xl"
         >
           What happens next?
         </motion.p>
 
-        <div className="mx-auto flex w-full max-w-2xl flex-col gap-4 sm:flex-row sm:items-stretch sm:justify-center sm:gap-5">
+        <div className="mx-auto flex w-full max-w-2xl flex-col gap-4 sm:flex-row sm:items-stretch sm:justify-center sm:gap-5 lg:max-w-4xl lg:gap-6 tv:max-w-5xl tv:gap-8">
           {choices.map((choice, i) => (
             <motion.div
               key={choice.slug}
@@ -85,10 +88,10 @@ export function InteractiveChoiceOverlay({ choices, onSelect }: Props) {
                 <span className="choice-box__face">
                   <ChoiceIcon type={choice.icon} />
                   <span className="min-w-0 sm:flex-1">
-                    <span className="choice-box__label block text-base font-black leading-tight sm:text-lg">
+                    <span className="choice-box__label block text-base font-black leading-tight sm:text-lg lg:text-xl tv:text-2xl">
                       {choice.label}
                     </span>
-                    <span className="choice-box__caption mt-0.5 block text-sm font-semibold leading-snug sm:text-[0.9375rem]">
+                    <span className="choice-box__caption mt-0.5 block text-sm font-semibold leading-snug sm:text-[0.9375rem] lg:text-base tv:text-lg">
                       {choice.caption}
                     </span>
                   </span>
@@ -98,8 +101,8 @@ export function InteractiveChoiceOverlay({ choices, onSelect }: Props) {
           ))}
         </div>
 
-        <div className="mx-auto mt-3 w-full max-w-2xl pb-1 sm:mt-4">
-          <p className="mb-2 text-center text-[0.65rem] font-bold uppercase tracking-[0.18em] text-[#FFDE59] sm:mb-3 sm:text-xs">
+        <div className="mx-auto mt-3 w-full max-w-2xl pb-1 sm:mt-4 lg:max-w-4xl lg:pb-2 tv:max-w-5xl tv:mt-6">
+          <p className="type-label mb-2 text-center font-bold text-[#FFDE59] sm:mb-3 lg:text-sm tv:mb-4 tv:text-base">
             Choose before the trail cools
           </p>
           <ChoiceTimerBar progressPct={timeLeftPct} />
