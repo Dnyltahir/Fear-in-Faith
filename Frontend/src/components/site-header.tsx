@@ -34,15 +34,15 @@ export function SiteHeader() {
         <div className="site-container flex h-[var(--site-header-height)] items-center justify-between gap-3 md:gap-5">
           <Link
             href="/"
-            className="flex h-full min-w-0 shrink-0 items-center md:max-w-[36%]"
+            className="flex h-full min-w-0 shrink-0 items-center md:max-w-[50%]"
           >
             <Image
               src="/images/wordmark.png"
               alt="DAWA-HI"
-              width={280}
-              height={72}
+              width={520}
+              height={128}
               priority
-              className="block h-9 w-auto max-h-9 max-w-[min(46vw,170px)] object-contain object-left md:h-11 md:max-h-11 md:max-w-[210px] lg:h-12 lg:max-w-[250px] 2xl:h-[3.25rem] 2xl:max-w-[280px]"
+              className="block h-14 w-auto max-h-14 max-w-[min(62vw,300px)] object-contain object-left sm:h-16 sm:max-h-16 sm:max-w-[340px] md:h-[4.25rem] md:max-h-[4.25rem] md:max-w-[400px] lg:h-[4.75rem] lg:max-h-[4.75rem] lg:max-w-[460px] xl:h-20 xl:max-h-20 xl:max-w-[520px] 2xl:h-[5.5rem] 2xl:max-h-[5.5rem] 2xl:max-w-[580px]"
             />
           </Link>
 
@@ -73,7 +73,7 @@ export function SiteHeader() {
               alt=""
               width={72}
               height={72}
-              className="block size-9 object-contain md:size-11 lg:size-12 2xl:size-[3.25rem]"
+              className="block size-11 object-contain sm:size-12 md:size-14 lg:size-16 2xl:size-[4.5rem]"
             />
           </Link>
         </div>

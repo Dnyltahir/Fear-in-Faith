@@ -16,7 +16,7 @@
   --shadow-card: 0 8px 32px rgba(148, 64, 221, 0.08);
   --radius-card: 1rem;
   --radius-card-lg: 1.25rem;
-  --site-header-height: 4rem;
+  --site-header-height: 5rem;
   --site-dock-height: 4.25rem;
   --content-gap: 1.5rem;
   --site-max-width: 64rem;
@@ -27,7 +27,7 @@
 
 @media (min-width: 640px) {
   :root {
-    --site-header-height: 4.75rem;
+    --site-header-height: 5.75rem;
     --site-dock-height: 4.5rem;
     --content-gap: 2rem;
     --site-max-width: 72rem;
@@ -66,7 +66,7 @@
 @media (min-width: 1536px) {
   :root {
     --site-max-width: 96rem;
-    --site-header-height: 5.25rem;
+    --site-header-height: 6.5rem;
     --site-dock-height: 4.75rem;
     --content-gap: 3rem;
     --section-gap: clamp(2.5rem, 3vw, 3.5rem);
@@ -76,7 +76,7 @@
 @media (min-width: 1920px) {
   :root {
     --site-max-width: 108rem;
-    --site-header-height: 5.75rem;
+    --site-header-height: 7.25rem;
     --site-dock-height: 5rem;
     --content-gap: 3.5rem;
     --site-padding-x: clamp(2rem, 4vw, 4rem);
