@@ -6,20 +6,30 @@ import { MessageCircle, Tv } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { DiscoveryZone } from "@/components/quest/discovery-zone";
 import { RoundTable } from "@/components/quest/round-table";
+import { useScrollChrome } from "@/context/scroll-chrome";
+import { cn } from "@/lib/utils";
 
 export function SafeDock() {
   const [tab, setTab] = useState("discovery");
+  const { chromeVisible } = useScrollChrome();
 
   return (
     <Tabs value={tab} onValueChange={setTab} className="w-full">
-      <div className="sticky top-[var(--site-header-height)] z-40 border-b border-[#e6cf3a]/80 bg-[#FFDE59] py-3 shadow-sm">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6">
-          <div className="relative rounded-xl bg-white/55 p-1.5 ring-1 ring-[#e6cf3a]/70">
+      <div
+        className={cn(
+          "fixed left-0 right-0 z-40 border-b border-[#e6cf3a]/70 bg-[#FFDE59]/95 py-3 shadow-sm backdrop-blur-sm transition-transform duration-300 ease-in-out md:py-3.5 lg:py-4",
+          chromeVisible
+            ? "top-[var(--site-header-height)] translate-y-0"
+            : "top-[var(--site-header-height)] -translate-y-[calc(var(--site-header-height)+var(--site-dock-height))]",
+        )}
+      >
+        <div className="site-container">
+          <div className="relative overflow-hidden rounded-xl bg-white/60 p-1.5 shadow-sm ring-1 ring-[#e6cf3a]/60 md:rounded-2xl md:p-2">
             <motion.div
               layout
               layoutId="safe-dock-pill"
               aria-hidden
-              className="pointer-events-none absolute bottom-1.5 top-1.5 rounded-lg bg-[#9440DD] shadow-[0_8px_28px_rgba(148,64,221,0.35)]"
+              className="pointer-events-none absolute bottom-1.5 top-1.5 rounded-lg bg-[#9440DD] shadow-[0_6px_20px_rgba(148,64,221,0.32)] md:bottom-2 md:top-2 md:rounded-xl"
               initial={false}
               animate={{
                 left: tab === "discovery" ? 6 : "calc(50% + 3px)",
@@ -27,27 +37,33 @@ export function SafeDock() {
               }}
               transition={{ type: "spring", stiffness: 460, damping: 36 }}
             />
-            <TabsList className="relative z-10 flex w-full gap-1.5 bg-transparent p-0 ring-0">
+            <TabsList className="relative z-10 flex w-full gap-1 bg-transparent p-0 ring-0 md:gap-1.5">
               <TabsTrigger
                 value="discovery"
-                className="min-h-0 flex-1 gap-1.5 rounded-lg px-2 py-2 text-sm font-semibold sm:gap-2 sm:px-3 sm:py-2.5 sm:text-base"
+                className="btn-touch min-h-[2.625rem] flex-1 gap-1.5 rounded-lg px-2 py-2 text-[0.8125rem] font-semibold md:min-h-[2.875rem] md:gap-2 md:px-4 md:py-2.5 md:text-[0.9375rem] lg:min-h-[3rem] lg:text-base xl:text-lg"
               >
-                <Tv className="size-4 shrink-0 sm:size-[1.125rem]" aria-hidden />
-                The Discovery Zone
+                <Tv className="size-4 shrink-0 md:size-[1.125rem] lg:size-5" aria-hidden />
+                <span className="truncate">Discovery Zone</span>
               </TabsTrigger>
               <TabsTrigger
                 value="community"
-                className="min-h-0 flex-1 gap-1.5 rounded-lg px-2 py-2 text-sm font-semibold sm:gap-2 sm:px-3 sm:py-2.5 sm:text-base"
+                className="btn-touch min-h-[2.625rem] flex-1 gap-1.5 rounded-lg px-2 py-2 text-[0.8125rem] font-semibold md:min-h-[2.875rem] md:gap-2 md:px-4 md:py-2.5 md:text-[0.9375rem] lg:min-h-[3rem] lg:text-base xl:text-lg"
               >
-                <MessageCircle className="size-4 shrink-0 sm:size-[1.125rem]" aria-hidden />
-                The Round Table
+                <MessageCircle className="size-4 shrink-0 md:size-[1.125rem] lg:size-5" aria-hidden />
+                <span className="truncate">Round Table</span>
               </TabsTrigger>
             </TabsList>
           </div>
         </div>
       </div>
 
-      <div className="mx-auto max-w-5xl px-4 pb-8 pt-6 sm:px-6 sm:pb-10">
+      <div
+        className="shrink-0"
+        style={{ height: "var(--site-dock-height)" }}
+        aria-hidden
+      />
+
+      <div className="site-container pb-8 pt-5 sm:pb-10 md:pt-7 lg:pb-12 lg:pt-8">
         <TabsContent
           value="discovery"
           forceMount

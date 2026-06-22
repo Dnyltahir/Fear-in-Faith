@@ -93,7 +93,7 @@ function TypingIndicator() {
           />
         ))}
       </motion.div>
-      <p className="text-sm font-semibold text-[#9440DD]">A scholar is typing…</p>
+      <p className="type-body text-sm font-semibold text-[#9440DD] md:text-base">A scholar is typing…</p>
     </motion.div>
   );
 }
@@ -115,8 +115,8 @@ function BubbleCard({
       transition={{ type: "spring", stiffness: 380, damping: 28 }}
       className={
         c.isSelf
-          ? "ml-6 rounded-2xl border border-[#9440DD]/35 bg-gradient-to-br from-purple-50 to-white p-5 shadow-md shadow-[#9440DD]/10 ring-1 ring-[#9440DD]/20"
-          : "rounded-2xl border border-slate-200/90 bg-white p-5 shadow-sm shadow-slate-200/50 backdrop-blur-md"
+          ? "ml-4 rounded-2xl border border-[#9440DD]/35 bg-gradient-to-br from-purple-50 to-white p-4 shadow-md shadow-[#9440DD]/10 ring-1 ring-[#9440DD]/20 md:ml-6 md:p-5 lg:p-6"
+          : "rounded-2xl border border-slate-200/90 bg-white p-4 shadow-sm shadow-slate-200/50 backdrop-blur-md md:p-5 lg:p-6"
       }
     >
       <motion.div
@@ -125,7 +125,7 @@ function BubbleCard({
         transition={{ type: "spring", stiffness: 400, damping: 30 }}
       >
         <motion.div
-          className="flex size-16 shrink-0 items-center justify-center rounded-2xl bg-slate-100 text-3xl ring-1 ring-slate-200"
+          className="flex size-14 shrink-0 items-center justify-center rounded-2xl bg-slate-100 text-2xl ring-1 ring-slate-200 md:size-16 md:text-3xl"
           aria-hidden
           whileTap={{ scale: 0.92, rotate: -6 }}
         >
@@ -133,7 +133,7 @@ function BubbleCard({
         </motion.div>
         <motion.div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-2">
-            <p className="text-lg font-bold text-slate-900">{c.author}</p>
+            <p className="type-body font-bold text-slate-900">{c.author}</p>
             {c.verified ? (
               <span className="inline-flex items-center gap-1 rounded-full bg-[#9440DD]/12 px-3 py-1 text-sm font-semibold text-[#9440DD] ring-1 ring-[#9440DD]/35">
                 <ShieldCheck className="size-4" aria-hidden />
@@ -146,7 +146,7 @@ function BubbleCard({
               </span>
             ) : null}
           </div>
-          <p className="mt-3 text-lg leading-relaxed text-slate-700">{c.body}</p>
+          <p className="type-body mt-3 text-slate-700">{c.body}</p>
           <motion.div
             className="mt-3 flex flex-wrap gap-2"
             initial="hidden"
@@ -167,7 +167,7 @@ function BubbleCard({
               onClick={() => onLike(c.id)}
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
-              className="inline-flex h-12 items-center gap-2 rounded-2xl border border-slate-200 bg-slate-50 px-4 text-lg font-semibold text-slate-800 ring-1 ring-slate-200/80 hover:bg-slate-100"
+              className="btn-touch inline-flex items-center gap-2 rounded-2xl border border-slate-200 bg-slate-50 px-4 text-base font-semibold text-slate-800 ring-1 ring-slate-200/80 hover:bg-slate-100 md:text-lg"
             >
               <Heart className="size-5 text-[#9440DD]" aria-hidden />
               Like
@@ -178,7 +178,7 @@ function BubbleCard({
               onClick={() => onComment(c.id)}
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
-              className="inline-flex h-12 items-center gap-2 rounded-2xl border border-slate-200 bg-slate-50 px-4 text-lg font-semibold text-slate-800 ring-1 ring-slate-200/80 hover:bg-slate-100"
+              className="btn-touch inline-flex items-center gap-2 rounded-2xl border border-slate-200 bg-slate-50 px-4 text-base font-semibold text-slate-800 ring-1 ring-slate-200/80 hover:bg-slate-100 md:text-lg"
             >
               <MessageSquare className="size-5 text-[#9440DD]" aria-hidden />
               Comment
@@ -288,64 +288,61 @@ export function RoundTable() {
 
   return (
     <motion.div
-      className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px]"
+      className="grid gap-6 md:grid-cols-[minmax(0,1fr)_minmax(260px,340px)] md:gap-8 lg:gap-10"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
     >
-      <div className="flex min-h-0 flex-col gap-6">
-        <motion.div
-          className="flex items-center gap-3"
-          whileHover={{ scale: 1.01 }}
-        >
-          <MessageCircle className="size-8 text-[#9440DD]" aria-hidden />
-          <motion.div>
-            <p className="text-sm font-semibold uppercase tracking-widest text-slate-900">
-              <span className="rounded-md bg-[#FFDE59] px-2 py-0.5 ring-1 ring-[#e6cf3a]/80">
-                The Round Table
-              </span>
+      <div className="surface-card surface-card--elevated flex min-h-0 flex-col overflow-hidden">
+        <div className="surface-card__body flex flex-col gap-5 border-b border-slate-100 pb-5 md:gap-6">
+          <div className="flex items-start gap-3">
+            <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-purple-50 ring-1 ring-[#9440DD]/20 md:size-12">
+              <MessageCircle className="size-5 text-[#9440DD] md:size-6" aria-hidden />
+            </div>
+            <div>
+              <p className="type-label font-semibold text-slate-800">
+                <span className="badge-yellow">Round Table</span>
+              </p>
+              <h2 className="type-h2 mt-1.5 font-black text-slate-900">Live scholar chat</h2>
+              <p className="type-body mt-1 text-slate-600">
+                Ask questions and connect with verified guides.
+              </p>
+            </div>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-3 rounded-xl border border-[#9440DD]/20 bg-gradient-to-r from-purple-50/80 to-[#FFDE59]/15 px-4 py-3">
+            <span className="relative flex size-2.5">
+              <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-400 opacity-60" />
+              <span className="relative inline-flex size-2.5 rounded-full bg-emerald-500" />
+            </span>
+            <Users className="size-4 text-[#9440DD]" aria-hidden />
+            <p className="type-body font-semibold text-slate-800">
+              <span className="text-[#9440DD]">{onlineCount} scholars</span> online
             </p>
-            <h2 className="text-2xl font-black text-slate-900">Live scholar chat</h2>
-          </motion.div>
-        </motion.div>
+          </div>
 
-        <motion.div
-          className="flex flex-wrap items-center gap-3 rounded-2xl border border-[#9440DD]/25 bg-gradient-to-r from-purple-50/90 to-[#FFDE59]/20 px-4 py-3"
-          initial={{ opacity: 0, y: -8 }}
-          animate={{ opacity: 1, y: 0 }}
-        >
-          <span className="relative flex size-3">
-            <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-400 opacity-60" />
-            <span className="relative inline-flex size-3 rounded-full bg-emerald-500" />
-          </span>
-          <Users className="size-5 text-[#9440DD]" aria-hidden />
-          <p className="text-lg font-semibold text-slate-800">
-            <span className="text-[#9440DD]">{onlineCount} scholars</span> online now
-          </p>
-          <p className="text-sm text-slate-600">Likes and comments update live</p>
-        </motion.div>
-
-        <motion.button
-          type="button"
-          onClick={() => setAskOpen(true)}
-          whileHover={{ scale: 1.01, y: -2 }}
-          whileTap={{ scale: 0.99 }}
-          className="flex w-full flex-col items-start gap-2 rounded-2xl border border-dashed border-[#9440DD]/45 bg-purple-50/60 px-5 py-5 text-left ring-1 ring-slate-200/80 transition-colors hover:bg-purple-50"
-        >
-          <p className="flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-[#9440DD]">
-            <Sparkles className="size-4" aria-hidden />
-            Ask a Big Question
-          </p>
-          <p className="text-xl font-bold text-slate-900">
-            Tap Here To Connect With Scholars
-          </p>
-          <p className="text-lg text-slate-600">
-            Or type in the chat bar below — scholars often reply within moments.
-          </p>
-        </motion.button>
+          <motion.button
+            type="button"
+            onClick={() => setAskOpen(true)}
+            whileHover={{ scale: 1.005, y: -1 }}
+            whileTap={{ scale: 0.995 }}
+            className="btn-touch flex w-full flex-col items-start gap-1.5 rounded-xl border border-dashed border-[#9440DD]/40 bg-purple-50/50 px-4 py-4 text-left transition-colors hover:bg-purple-50 md:px-5 md:py-5"
+          >
+            <p className="type-label flex items-center gap-2 font-semibold text-[#9440DD]">
+              <Sparkles className="size-4" aria-hidden />
+              Ask a Big Question
+            </p>
+            <p className="type-h3 font-bold text-slate-900">
+              Tap Here To Connect With Scholars
+            </p>
+            <p className="type-body text-slate-600">
+              Or type in the chat bar below.
+            </p>
+          </motion.button>
+        </div>
 
         <div
           ref={scrollRef}
-          className="max-h-[min(52vh,520px)] space-y-4 overflow-y-auto scroll-smooth rounded-2xl border border-slate-200/90 bg-slate-50/50 p-4 ring-1 ring-slate-100"
+          className="max-h-[min(48vh,480px)] flex-1 space-y-3 overflow-y-auto scroll-smooth px-4 py-4 md:max-h-[min(54vh,580px)] md:px-5 md:py-5 lg:max-h-[min(58vh,680px)]"
           role="log"
           aria-label="Round Table conversation"
           aria-live="polite"
@@ -364,14 +361,12 @@ export function RoundTable() {
         </div>
 
         <motion.div
-          className="sticky bottom-0 z-10 rounded-2xl border border-[#9440DD]/35 bg-white/95 p-4 shadow-lg shadow-[#9440DD]/10 ring-1 ring-slate-200/90 backdrop-blur-xl"
-          initial={{ y: 24, opacity: 0 }}
+          className="sticky bottom-0 z-10 border-t border-slate-100 bg-white/95 p-4 backdrop-blur-md md:p-5"
+          initial={{ y: 16, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.15 }}
+          transition={{ delay: 0.1 }}
         >
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#9440DD]">
-            Chat with scholars
-          </p>
+          <p className="type-label mb-3 font-semibold text-[#9440DD]">Chat with scholars</p>
           <motion.div
             className="mb-3 flex gap-2 overflow-x-auto pb-1"
             role="group"
@@ -387,7 +382,7 @@ export function RoundTable() {
                 }}
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.96 }}
-                className="shrink-0 rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm font-semibold text-slate-800 hover:border-[#9440DD]/40 hover:bg-purple-50"
+                className="shrink-0 rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-[0.8125rem] font-semibold text-slate-700 hover:border-[#9440DD]/40 hover:bg-purple-50 md:text-sm"
               >
                 {chip}
               </motion.button>
@@ -411,32 +406,33 @@ export function RoundTable() {
               onChange={(e) => setDraft(e.target.value)}
               placeholder="Say hello or ask a question…"
               autoComplete="off"
-              className="min-h-14 flex-1 rounded-2xl border border-slate-200 bg-slate-50 px-4 text-lg text-slate-900 outline-none ring-[#9440DD]/30 placeholder:text-slate-400 focus:ring-2"
+              className="btn-touch min-h-12 flex-1 rounded-xl border border-slate-200 bg-slate-50 px-4 text-[0.9375rem] text-slate-900 outline-none ring-[#9440DD]/30 placeholder:text-slate-400 focus:border-[#9440DD]/40 focus:ring-2 md:min-h-[3rem] md:text-base"
             />
             <motion.button
               type="submit"
               disabled={draft.trim().length < 1}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="inline-flex size-14 shrink-0 items-center justify-center rounded-2xl bg-[#9440DD] text-white shadow-lg shadow-[#9440DD]/25 transition-colors hover:bg-[#7a32bd] disabled:cursor-not-allowed disabled:opacity-45"
+              className="btn-touch inline-flex size-12 shrink-0 items-center justify-center rounded-xl bg-[#9440DD] text-white shadow-md shadow-[#9440DD]/25 transition-colors hover:bg-[#7a32bd] disabled:cursor-not-allowed disabled:opacity-45 md:size-[3rem]"
               aria-label="Send message"
             >
               <Send className="size-6" aria-hidden />
             </motion.button>
           </form>
-          <p className="mt-2 text-center text-sm text-slate-500">
+          <p className="type-label mt-2 text-center font-medium normal-case tracking-normal text-slate-500">
             Press Enter to send · Be kind — guides are listening
           </p>
         </motion.div>
       </div>
 
-      <aside className="space-y-4 lg:sticky lg:top-28 lg:self-start">
-        <div className="rounded-2xl border border-slate-200/90 bg-white/85 p-5 shadow-md shadow-slate-200/60 ring-1 ring-slate-100 backdrop-blur-xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#9440DD]">
+      <aside className="md:sticky md:top-[calc(var(--site-header-height)+4.5rem)] md:self-start lg:top-[calc(var(--site-header-height)+5rem)]">
+        <div className="surface-card h-full">
+          <div className="surface-card__body">
+          <p className="type-label font-semibold uppercase text-[#9440DD]">
             Community compass
           </p>
-          <h3 className="mt-2 text-xl font-black text-slate-900">Safe-Cosmos tips</h3>
-          <p className="mt-2 text-lg leading-relaxed text-slate-600">
+          <h3 className="type-h2 mt-2 font-black text-slate-900">Safe-Cosmos tips</h3>
+          <p className="type-body mt-2 text-slate-600">
             Guides with the badge are adults checked by your team. Everyone can
             use Report — it is big, bright, and always okay to tap.
           </p>
@@ -456,6 +452,7 @@ export function RoundTable() {
               </AccordionContent>
             </AccordionItem>
           </Accordion>
+          </div>
         </div>
       </aside>
 

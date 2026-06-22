@@ -33,7 +33,7 @@ const AccordionTrigger = ({
     <AccordionPrimitive.Trigger
       ref={ref}
       className={cn(
-        "flex flex-1 items-center justify-between gap-3 py-4 text-left text-lg font-semibold text-slate-900 outline-none transition-colors hover:text-[#9440DD] focus-visible:ring-2 focus-visible:ring-[#9440DD]/45 [&[data-state=open]>svg]:rotate-180",
+        "type-body flex flex-1 items-center justify-between gap-3 py-4 text-left font-semibold text-slate-900 outline-none transition-colors hover:text-[#9440DD] focus-visible:ring-2 focus-visible:ring-[#9440DD]/45 md:py-5 [&[data-state=open]>svg]:rotate-180",
         className,
       )}
       {...props}
@@ -55,7 +55,7 @@ const AccordionContent = ({
 }) => (
   <AccordionPrimitive.Content
     ref={ref}
-    className="overflow-hidden text-lg text-slate-600 data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
+    className="type-body overflow-hidden text-slate-600 data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
     {...props}
   >
     <div className={cn("pb-4 pt-0", className)}>{children}</div>

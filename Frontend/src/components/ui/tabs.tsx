@@ -25,7 +25,7 @@ const TabsTrigger = ({
 }: React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>) => (
   <TabsPrimitive.Trigger
     className={cn(
-      "relative z-10 inline-flex min-h-[3.25rem] flex-1 items-center justify-center gap-2 rounded-xl px-4 py-3 text-lg font-semibold outline-none transition-colors",
+      "type-body relative z-10 inline-flex min-h-[3.25rem] flex-1 items-center justify-center gap-2 rounded-xl px-4 py-3 font-semibold outline-none transition-colors",
       "text-slate-600 hover:text-slate-900",
       "focus-visible:ring-2 focus-visible:ring-[#9440DD]/55",
       "data-[state=active]:text-white",

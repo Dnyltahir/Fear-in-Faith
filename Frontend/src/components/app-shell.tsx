@@ -15,11 +15,6 @@ export function AppShell({ children }: Props) {
     <Providers>
       <div className="flex min-h-0 flex-1 flex-col">
         <SiteHeader />
-        <div
-          className="shrink-0"
-          style={{ height: "var(--content-gap)" }}
-          aria-hidden
-        />
         <main className="relative z-0 min-h-0 flex-1">{children}</main>
         <LoadingOverlay />
       </div>

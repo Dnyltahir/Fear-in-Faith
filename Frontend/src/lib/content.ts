@@ -11,7 +11,7 @@ export const VIDEO_FILES = {
 } as const;
 
 /** Static art for the IQRA / Theodicy shelf card (hover plays episode preview) */
-export const IQRA_EPISODE_THUMBNAIL = "/images/iqra-episode-thumbnail.png";
+export const IQRA_EPISODE_THUMBNAIL = "/images/iqra-show-watermark.jpg";
 
 export type WatchSlug = "theodicy" | "uncle-sami" | "get-the-book";
 

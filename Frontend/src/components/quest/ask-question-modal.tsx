@@ -25,7 +25,7 @@ export function AskQuestionModal({ open, onOpenChange, onPost }: Props) {
       {open ? (
         <motion.div
           key="ask"
-          className="fixed inset-0 z-50 flex items-end justify-center bg-slate-900/25 p-4 backdrop-blur-md sm:items-center"
+          className="fixed inset-0 z-50 flex items-end justify-center bg-slate-900/25 p-4 backdrop-blur-md sm:items-center md:p-6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -38,45 +38,45 @@ export function AskQuestionModal({ open, onOpenChange, onPost }: Props) {
             animate={{ y: 0, opacity: 1, scale: 1 }}
             exit={{ y: 24, opacity: 0, scale: 0.98 }}
             transition={{ type: "spring", stiffness: 420, damping: 32 }}
-            className="relative w-full max-w-2xl overflow-hidden rounded-2xl border-2 border-[#9440DD] bg-white shadow-xl shadow-slate-300/50 ring-1 ring-slate-200"
+            className="relative w-full max-w-2xl overflow-hidden rounded-2xl border-2 border-[#9440DD] bg-white shadow-xl shadow-slate-300/50 ring-1 ring-slate-200 lg:max-w-3xl lg:rounded-3xl xl:max-w-4xl"
           >
-            <div className="rounded-2xl bg-white p-6 sm:p-8">
+            <div className="rounded-2xl bg-white p-6 sm:p-8 lg:p-10">
               <button
                 type="button"
                 onClick={() => onOpenChange(false)}
-                className="absolute right-4 top-4 inline-flex size-11 items-center justify-center rounded-2xl border border-slate-200 bg-slate-100 text-slate-700 hover:bg-slate-200"
+                className="btn-touch absolute right-4 top-4 inline-flex size-11 items-center justify-center rounded-2xl border border-slate-200 bg-slate-100 text-slate-700 hover:bg-slate-200 md:size-12"
                 aria-label="Close"
               >
-                <X className="size-5" />
+                <X className="size-5 md:size-6" />
               </button>
-              <div className="flex items-center gap-3 pr-12">
-                <Sparkles className="size-8 text-[#FFDE59] drop-shadow-[0_1px_2px_rgba(15,23,42,0.35)]" aria-hidden />
+              <div className="flex items-center gap-3 pr-12 md:gap-4">
+                <Sparkles className="size-8 text-[#FFDE59] drop-shadow-[0_1px_2px_rgba(15,23,42,0.35)] md:size-9 lg:size-10" aria-hidden />
                 <div>
-                  <p className="text-sm font-semibold uppercase tracking-widest text-[#9440DD]">
+                  <p className="type-label font-semibold uppercase text-[#9440DD]">
                     Ask a Big Question
                   </p>
-                  <h2 id="ask-title" className="text-2xl font-black text-slate-900">
+                  <h2 id="ask-title" className="type-h2 font-black text-slate-900">
                     Your wonder matters here
                   </h2>
                 </div>
               </div>
-              <p className="mt-4 text-lg text-slate-600">
+              <p className="type-body mt-4 text-slate-600">
                 Pick a starter sentence, then make it your own. A friendly guide
                 may reply when they see your post.
               </p>
-              <div className="mt-6 grid gap-3 sm:grid-cols-2">
+              <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:gap-4">
                 {PROMPTS.map((p) => (
                   <button
                     key={p}
                     type="button"
                     onClick={() => setText(p + " ")}
-                    className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-left text-lg leading-snug text-slate-800 ring-1 ring-transparent transition-all hover:-translate-y-0.5 hover:border-[#9440DD]/45 hover:ring-[#9440DD]/25"
+                    className="btn-touch rounded-2xl border border-slate-200 bg-slate-50 p-4 text-left leading-snug text-slate-800 ring-1 ring-transparent transition-all hover:-translate-y-0.5 hover:border-[#9440DD]/45 hover:ring-[#9440DD]/25 md:p-5 type-body"
                   >
                     {p}
                   </button>
                 ))}
               </div>
-              <label className="mt-8 block text-lg font-semibold text-slate-900" htmlFor="big-q">
+              <label className="type-body mt-8 block font-semibold text-slate-900" htmlFor="big-q">
                 Your question
               </label>
               <textarea
@@ -84,14 +84,14 @@ export function AskQuestionModal({ open, onOpenChange, onPost }: Props) {
                 value={text}
                 onChange={(e) => setText(e.target.value)}
                 rows={4}
-                className="mt-3 w-full resize-y rounded-2xl border border-slate-200 bg-slate-50 p-4 text-lg text-slate-900 outline-none ring-[#9440DD]/35 placeholder:text-slate-400 focus:ring-2"
+                className="type-body mt-3 w-full resize-y rounded-2xl border border-slate-200 bg-slate-50 p-4 text-slate-900 outline-none ring-[#9440DD]/35 placeholder:text-slate-400 focus:ring-2 lg:min-h-[10rem]"
                 placeholder="Type here — short is okay!"
               />
-              <div className="mt-6 flex flex-wrap gap-3">
+              <div className="mt-6 flex flex-wrap gap-3 lg:mt-8">
                 <button
                   type="button"
                   onClick={() => onOpenChange(false)}
-                  className="h-14 flex-1 rounded-2xl border border-slate-200 text-lg font-semibold text-slate-800 hover:bg-slate-50"
+                  className="btn-touch flex-1 rounded-2xl border border-slate-200 text-base font-semibold text-slate-800 hover:bg-slate-50 md:text-lg"
                 >
                   Maybe later
                 </button>
@@ -104,7 +104,7 @@ export function AskQuestionModal({ open, onOpenChange, onPost }: Props) {
                     setText("");
                     onOpenChange(false);
                   }}
-                  className="h-14 flex-1 rounded-2xl bg-[#9440DD] text-lg font-bold text-white shadow-lg shadow-[#9440DD]/25 transition-colors hover:bg-[#7a32bd] disabled:cursor-not-allowed disabled:opacity-50"
+                  className="btn-touch flex-1 rounded-2xl bg-[#9440DD] text-base font-bold text-white shadow-lg shadow-[#9440DD]/25 transition-colors hover:bg-[#7a32bd] disabled:cursor-not-allowed disabled:opacity-50 md:text-lg lg:text-xl"
                 >
                   Post to the Round Table
                 </button>

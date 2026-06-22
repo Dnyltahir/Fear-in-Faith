@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { Play } from "lucide-react";
 import { useCallback, useRef, useState } from "react";
 import type { WatchEpisode } from "@/lib/content";
 import { FunMeter } from "@/components/quest/fun-meter";
@@ -23,9 +24,7 @@ export function EpisodeShelfCard({ episode, thumbnailSrc, accentClass }: Props) 
     setPreview(true);
     const v = videoRef.current;
     if (!v) return;
-    void v.play().catch(() => {
-      /* autoplay policies — ignore */
-    });
+    void v.play().catch(() => {});
   }, [hasVideoSrc]);
 
   const stopPreview = useCallback(() => {
@@ -38,30 +37,29 @@ export function EpisodeShelfCard({ episode, thumbnailSrc, accentClass }: Props) 
   }, [hasVideoSrc]);
 
   return (
-    <div
+    <article
       className={cn(
-        "rounded-2xl border-2 bg-white shadow-[0_20px_60px_rgba(148,64,221,0.2)]",
+        "overflow-hidden rounded-xl border border-slate-200/80 bg-white shadow-[0_12px_40px_rgba(148,64,221,0.12)]",
         accentClass,
-        "border-t-4 border-t-[#FFDE59]",
+        "border-t-[3px] border-t-[#FFDE59]",
       )}
     >
       <div
-        className="p-5 sm:p-7"
+        className="p-4 sm:p-5 lg:p-6"
         onPointerEnter={startPreview}
         onPointerLeave={stopPreview}
       >
-        <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-slate-100 ring-1 ring-slate-200">
+        <div className="group relative aspect-square w-full overflow-hidden rounded-lg bg-[#9440DD]/20 ring-1 ring-[#9440DD]/25">
           <Image
             src={thumbnailSrc}
             alt={`${episode.title} — IQRA episode artwork`}
             width={1024}
-            height={768}
-            sizes="(max-width: 768px) 100vw, 448px"
+            height={1024}
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 512px, 672px"
             className={cn(
               "absolute inset-0 h-full w-full object-cover transition-opacity duration-300",
               preview ? "opacity-0" : "opacity-100",
             )}
-            priority={false}
           />
           {hasVideoSrc ? (
             <video
@@ -78,34 +76,37 @@ export function EpisodeShelfCard({ episode, thumbnailSrc, accentClass }: Props) 
               aria-hidden
             />
           ) : null}
+          <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-black/0 transition-colors group-hover:bg-black/10">
+            <span className="flex size-12 items-center justify-center rounded-full bg-white/90 text-[#9440DD] opacity-0 shadow-lg transition-opacity group-hover:opacity-100 md:size-14">
+              <Play className="size-5 fill-current md:size-6" aria-hidden />
+            </span>
+          </div>
         </div>
 
-        <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
+        <div className="mt-4 flex flex-wrap items-start justify-between gap-3">
           <div>
-            <p className="text-sm font-semibold text-[#9440DD]">Chapter 1</p>
-            <h4 className="text-2xl font-black text-slate-900 sm:text-3xl">{episode.title}</h4>
+            <p className="type-label font-semibold text-[#9440DD]">Chapter 1</p>
+            <h4 className="type-h3 mt-0.5 font-black text-slate-900">{episode.title}</h4>
           </div>
-          <span className="rounded-full bg-[#FFDE59] px-4 py-2 text-sm font-semibold text-slate-900 ring-1 ring-[#e6cf3a]/90">
+          <span className="badge-yellow type-label font-bold normal-case tracking-normal">
             1 episode
           </span>
         </div>
 
-        <p className="mt-4 text-lg leading-relaxed text-slate-800">{episode.synopsis}</p>
+        <p className="type-body mt-3 text-slate-600">{episode.synopsis}</p>
 
-        <div className="mt-5 flex flex-wrap items-center gap-4">
-          <p className="text-sm font-semibold uppercase tracking-widest text-slate-700">
-            Fun meter
-          </p>
+        <div className="mt-4 flex flex-wrap items-center gap-3">
+          <p className="type-label font-semibold text-slate-600">Fun meter</p>
           <FunMeter level={episode.funLevel} />
         </div>
 
         <Link
           href={`/watch/${episode.slug}`}
-          className="mt-7 flex h-14 w-full items-center justify-center rounded-2xl bg-[#9440DD] text-lg font-bold text-white shadow-md shadow-[#9440DD]/35 ring-1 ring-[#9440DD]/30 transition-colors hover:bg-[#7a32bd] active:scale-[0.99]"
+          className="btn-touch btn-primary mt-5 flex w-full text-[0.9375rem] md:mt-6 md:text-base"
         >
           Watch episode
         </Link>
       </div>
-    </div>
+    </article>
   );
 }

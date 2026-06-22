@@ -7,7 +7,7 @@ export function SiteBackground() {
         backgroundColor: "var(--background)",
         backgroundImage: "url(/images/pattern.png)",
         backgroundRepeat: "repeat",
-        backgroundSize: "220px auto",
+        backgroundSize: "var(--pattern-tile-size) auto",
         backgroundPosition: "center top",
       }}
     />
