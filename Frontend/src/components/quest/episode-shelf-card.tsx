@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Play } from "lucide-react";
 import { useCallback, useRef, useState } from "react";
 import type { WatchEpisode } from "@/lib/content";
 import { FunMeter } from "@/components/quest/fun-meter";
@@ -49,7 +48,7 @@ export function EpisodeShelfCard({ episode, thumbnailSrc, accentClass }: Props) 
         onPointerEnter={startPreview}
         onPointerLeave={stopPreview}
       >
-        <div className="group relative aspect-square w-full overflow-hidden rounded-lg bg-[#9440DD]/20 ring-1 ring-[#9440DD]/25">
+        <div className="relative aspect-square w-full overflow-hidden rounded-lg bg-[#9440DD]/20 ring-1 ring-[#9440DD]/25">
           <Image
             src={thumbnailSrc}
             alt={`${episode.title} — IQRA episode artwork`}
@@ -76,11 +75,6 @@ export function EpisodeShelfCard({ episode, thumbnailSrc, accentClass }: Props) 
               aria-hidden
             />
           ) : null}
-          <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-black/0 transition-colors group-hover:bg-black/10">
-            <span className="flex size-12 items-center justify-center rounded-full bg-white/90 text-[#9440DD] opacity-0 shadow-lg transition-opacity group-hover:opacity-100 md:size-14">
-              <Play className="size-5 fill-current md:size-6" aria-hidden />
-            </span>
-          </div>
         </div>
 
         <div className="mt-4 flex flex-wrap items-start justify-between gap-3">
