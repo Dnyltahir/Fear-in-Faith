@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { motion } from "framer-motion";
 import { BookOpen, MessagesSquare } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -18,13 +17,14 @@ function ChoiceIcon({ type }: { type: AfterChoice["icon"] }) {
 
 type Props = {
   choices: AfterChoice[];
+  onSelect: (choice: AfterChoice) => void;
 };
 
 /**
  * “Choose your adventure” overlay inspired by interactive-video UI:
  * parchment choice tiles, wood-framed lime timer bar, motion entrance.
  */
-export function InteractiveChoiceOverlay({ choices }: Props) {
+export function InteractiveChoiceOverlay({ choices, onSelect }: Props) {
   const [timeLeftPct, setTimeLeftPct] = useState(100);
   const [urgent, setUrgent] = useState(false);
 
@@ -46,14 +46,11 @@ export function InteractiveChoiceOverlay({ choices }: Props) {
       role="dialog"
       aria-modal="true"
       aria-labelledby="choice-title"
-      className="pointer-events-auto absolute inset-0 flex h-full w-full flex-col bg-black/62"
+      className="pointer-events-auto absolute inset-0 flex h-full w-full flex-col"
     >
-      <div
-        className="h-2.5 w-full shrink-0 bg-[#3d2818] shadow-[inset_0_-2px_6px_rgba(0,0,0,0.45)]"
-        aria-hidden
-      />
+      <div className="min-h-0 flex-1" aria-hidden />
 
-      <div className="flex min-h-0 flex-1 flex-col justify-end px-3 pb-4 pt-3 sm:px-5 sm:pb-6 sm:pt-4">
+      <div className="shrink-0 bg-gradient-to-t from-black/75 via-black/40 to-transparent px-3 pb-4 pt-10 sm:px-5 sm:pb-6 sm:pt-14">
         <motion.p
           id="choice-title"
           initial={{ opacity: 0, y: 10 }}
@@ -82,10 +79,11 @@ export function InteractiveChoiceOverlay({ choices }: Props) {
               }}
               className="flex-1"
             >
-              <Link
-                href={`/watch/${choice.slug}`}
+              <button
+                type="button"
+                onClick={() => onSelect(choice)}
                 className={cn(
-                  "group flex h-full min-h-[5.25rem] flex-col items-center justify-center gap-2 rounded-sm px-3 py-3 text-center shadow-[0_5px_0_#5a3d24,0_10px_24px_rgba(0,0,0,0.4)] transition-transform active:scale-[0.98] sm:min-h-[5.5rem] sm:flex-row sm:justify-start sm:gap-3 sm:px-4 sm:py-3.5",
+                  "group flex h-full w-full min-h-[5.25rem] flex-col items-center justify-center gap-2 rounded-sm px-3 py-3 text-center shadow-[0_5px_0_#5a3d24,0_10px_24px_rgba(0,0,0,0.4)] transition-transform active:scale-[0.98] sm:min-h-[5.5rem] sm:flex-row sm:justify-start sm:gap-3 sm:px-4 sm:py-3.5",
                   "border-2 border-[#a28455] bg-[#efe4cf]",
                   "outline-none focus-visible:ring-2 focus-visible:ring-[#FFDE59]/90",
                   urgent && "motion-safe:animate-choice-wiggle",
@@ -104,7 +102,7 @@ export function InteractiveChoiceOverlay({ choices }: Props) {
                     {choice.caption}
                   </p>
                 </div>
-              </Link>
+              </button>
             </motion.div>
           ))}
         </div>
