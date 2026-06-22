@@ -9,10 +9,12 @@ import { InteractiveChoiceOverlay } from "@/components/watch/InteractiveChoiceOv
 import { cn } from "@/lib/utils";
 
 const BREAK_MS = 20 * 60 * 1000;
+const CONTROLS_HIDE_MS = 2500;
 
 export function WatchPlayer({ episode: initialEpisode }: { episode: WatchEpisode }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const playerRef = useRef<HTMLDivElement>(null);
+  const hideControlsTimerRef = useRef<number | null>(null);
   const [activeEpisode, setActiveEpisode] = useState(initialEpisode);
   const segments = useMemo(() => getEpisodeVideoSegments(activeEpisode), [activeEpisode]);
   const [segmentIndex, setSegmentIndex] = useState(0);
@@ -22,7 +24,30 @@ export function WatchPlayer({ episode: initialEpisode }: { episode: WatchEpisode
   const [showBreak, setShowBreak] = useState(false);
   const [showChoices, setShowChoices] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [showControls, setShowControls] = useState(false);
   const watchedMs = useRef(0);
+
+  const clearHideControlsTimer = useCallback(() => {
+    if (hideControlsTimerRef.current !== null) {
+      window.clearTimeout(hideControlsTimerRef.current);
+      hideControlsTimerRef.current = null;
+    }
+  }, []);
+
+  const scheduleHideControls = useCallback(() => {
+    clearHideControlsTimer();
+    hideControlsTimerRef.current = window.setTimeout(() => {
+      const v = videoRef.current;
+      if (v && !v.paused) {
+        setShowControls(false);
+      }
+    }, CONTROLS_HIDE_MS);
+  }, [clearHideControlsTimer]);
+
+  const revealControls = useCallback(() => {
+    setShowControls(true);
+    scheduleHideControls();
+  }, [scheduleHideControls]);
 
   useEffect(() => {
     setActiveEpisode(initialEpisode);
@@ -33,8 +58,39 @@ export function WatchPlayer({ episode: initialEpisode }: { episode: WatchEpisode
     watchedMs.current = 0;
     setShowChoices(false);
     setShowBreak(false);
+    setShowControls(false);
     setPlaying(segments.length > 0);
   }, [activeEpisode.slug, segments.length]);
+
+  useEffect(() => {
+    return () => clearHideControlsTimer();
+  }, [clearHideControlsTimer]);
+
+  useEffect(() => {
+    const player = playerRef.current;
+    if (!player || !hasVideoSrc || showChoices) return;
+
+    const onPointerActivity = () => revealControls();
+
+    player.addEventListener("mousemove", onPointerActivity);
+    player.addEventListener("touchstart", onPointerActivity, { passive: true });
+
+    return () => {
+      player.removeEventListener("mousemove", onPointerActivity);
+      player.removeEventListener("touchstart", onPointerActivity);
+    };
+  }, [hasVideoSrc, showChoices, revealControls]);
+
+  useEffect(() => {
+    if (!playing) {
+      clearHideControlsTimer();
+      setShowControls(true);
+      return;
+    }
+    if (showControls) {
+      scheduleHideControls();
+    }
+  }, [playing, showControls, clearHideControlsTimer, scheduleHideControls]);
 
   useEffect(() => {
     if (!showChoices) return;
@@ -124,8 +180,15 @@ export function WatchPlayer({ episode: initialEpisode }: { episode: WatchEpisode
     const next = WATCH_BY_SLUG[choice.slug];
     if (!next) return;
     setShowChoices(false);
+    setShowControls(false);
     setActiveEpisode(next);
   }
+
+  const controlsVisible = showControls || !playing;
+  const controlsClassName = cn(
+    "transition-opacity duration-300",
+    controlsVisible ? "opacity-100" : "pointer-events-none opacity-0",
+  );
 
   return (
     <div className="min-h-screen text-slate-900">
@@ -140,7 +203,8 @@ export function WatchPlayer({ episode: initialEpisode }: { episode: WatchEpisode
         <div
           ref={playerRef}
           className={cn(
-            "surface-card surface-card--elevated relative overflow-hidden bg-black",
+            "surface-card surface-card--elevated relative bg-black",
+            showChoices ? "overflow-visible" : "overflow-hidden",
             isFullscreen && "flex h-full w-full items-center justify-center",
           )}
         >
@@ -168,6 +232,7 @@ export function WatchPlayer({ episode: initialEpisode }: { episode: WatchEpisode
                 className={cn(
                   "btn-touch absolute right-3 top-3 z-10 inline-flex size-11 items-center justify-center rounded-xl bg-black/55 text-white ring-1 ring-white/20 backdrop-blur-sm transition-colors hover:bg-black/75 md:size-12 lg:rounded-2xl",
                   isFullscreen && "hidden",
+                  controlsClassName,
                 )}
                 aria-label="Enter fullscreen"
               >
@@ -175,7 +240,19 @@ export function WatchPlayer({ episode: initialEpisode }: { episode: WatchEpisode
               </button>
 
               {isFullscreen && !showChoices ? (
-                <div className="absolute inset-x-0 bottom-0 z-30 flex items-center justify-center gap-3 bg-gradient-to-t from-black/85 via-black/50 to-transparent px-4 pb-6 pt-14 sm:gap-4 sm:pb-8">
+                <div
+                  className={cn(
+                    "absolute inset-x-0 bottom-0 z-30 flex flex-col items-center pointer-events-none",
+                    controlsClassName,
+                  )}
+                >
+                  <div className="h-14 shrink-0 sm:h-16" aria-hidden />
+                  <div
+                    className={cn(
+                      "flex w-full items-center justify-center gap-3 bg-gradient-to-t from-black/90 via-black/65 to-transparent px-4 pb-4 pt-2 sm:gap-4 sm:pb-5 sm:pt-3",
+                      controlsVisible ? "pointer-events-auto" : "pointer-events-none",
+                    )}
+                  >
                   <button
                     type="button"
                     onClick={togglePlay}
@@ -202,6 +279,7 @@ export function WatchPlayer({ episode: initialEpisode }: { episode: WatchEpisode
                     <Minimize className="size-5 sm:size-6" aria-hidden />
                     Exit full screen
                   </button>
+                  </div>
                 </div>
               ) : null}
             </>
@@ -214,7 +292,7 @@ export function WatchPlayer({ episode: initialEpisode }: { episode: WatchEpisode
             {showChoices && activeEpisode.afterChoices?.length ? (
               <motion.div
                 key="iqra-branch-choices"
-                className="absolute inset-0 z-20"
+                className="absolute inset-0 z-20 overflow-visible"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
@@ -232,7 +310,14 @@ export function WatchPlayer({ episode: initialEpisode }: { episode: WatchEpisode
         <p className="type-body mt-4 text-white md:mt-6 lg:max-w-4xl">{activeEpisode.synopsis}</p>
 
         {hasVideoSrc && !isFullscreen ? (
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3 md:mt-10 md:gap-4">
+          <div
+            className={cn(
+              "mt-8 flex flex-wrap items-center justify-center gap-3 md:mt-10 md:gap-4",
+              controlsClassName,
+            )}
+            onMouseMove={revealControls}
+            onTouchStart={revealControls}
+          >
             <button
               type="button"
               onClick={togglePlay}
