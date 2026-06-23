@@ -4,23 +4,20 @@ function videoPath(filename: string) {
 }
 
 export const VIDEO_FILES = {
-  wakingUp: videoPath("Waking Up.mp4"),
-  news: videoPath("News.mp4"),
+  intro: videoPath("Intro.mp4"),
   babaSituation1: videoPath("Baba Situation 1.mp4"),
   babaSituation2: videoPath("Baba Situation 2.mp4"),
-  onlineSearch: videoPath("Online Search.mp4"),
-  walkingIn: videoPath("Walking In.mp4"),
+  askFatherSearchesOnline: videoPath("Ask Father (I) to Searches Online.mp4"),
   libraryWalkIn: videoPath("Library Walk In.mp4"),
-  readingBook: videoPath("Reading Book.mp4"),
-  uncleSamiSituation1: videoPath("Uncle Sami Situation 1.mp4"),
-  uncleSamiSituation2: videoPath("Uncle Sami Situation 2.mp4"),
-  uncleSamiPickingUpBook: videoPath("Uncle Sami Picking up Book.mp4"),
-  talkingToAudience: videoPath("Talking to Audience.mp4"),
+  libraryWalk: videoPath("Library Walk.mp4"),
   watchingCartoons: videoPath("Watching Cartoons.mp4"),
-  searchOnlinePath1: videoPath("SEARCH ONLINE PATH 1.MP4"),
   dreamScene: videoPath("Dream Scene.mp4"),
-  prayerScene: videoPath("Prayer Scene.mp4"),
-  afterSleepSearchOnlinePath: videoPath("after sleep search online path.MP4"),
+  prayer: videoPath("Prayer.mp4"),
+  dreamGuideSearchOnline: videoPath("Dream Guide to Search Online.mp4"),
+  uncleSamiSituation1: videoPath("Uncle Sami Situation 1.mp4"),
+  uncleSamiSituation1And2Pt2: videoPath("Uncle Sami Situation 1 + 2 - Pt 2.mp4"),
+  uncleSamiSituation2Pt1: videoPath("Uncle Sami Situation 2 - Pt 1.mp4"),
+  uncleSamiPickingUpBook: videoPath("Uncle Sami Picking up Book.mp4"),
 } as const;
 
 /** Static art for the IQRA / Theodicy shelf card (hover plays episode preview) */
@@ -30,14 +27,15 @@ export type WatchSlug =
   | "theodicy"
   | "baba-situation-1"
   | "baba-situation-2"
+  | "online-search-path"
+  | "library-walk-in-path"
   | "watches-youtube-path"
   | "sleep-path"
   | "allah-for-guidance"
   | "after-sleep-search-online"
-  | "online-search-path"
-  | "library-walk-in-path"
   | "uncle-sami-ask-book"
-  | "uncle-sami-research";
+  | "uncle-sami-research"
+  | "uncle-sami-parts-path";
 
 export type AfterChoice = {
   slug: WatchSlug;
@@ -59,17 +57,17 @@ export type WatchEpisode = {
   funLevel: 0 | 1 | 2 | 3 | 4 | 5;
 };
 
-const BABA_CHOICES: AfterChoice[] = [
+const OPENING_CHOICES: AfterChoice[] = [
   {
     slug: "baba-situation-1",
-    label: "Baba Situation 1",
-    caption: "Follow this path with Baba.",
+    label: "Discuss Question",
+    caption: "Talk through the question with Baba.",
     icon: "chat",
   },
   {
     slug: "baba-situation-2",
-    label: "Baba Situation 2",
-    caption: "See what happens on this path.",
+    label: "Avoid Question",
+    caption: "Turn away from the question for now.",
     icon: "book",
   },
 ];
@@ -78,7 +76,7 @@ const AFTER_BABA_SITUATION_1: AfterChoice[] = [
   {
     slug: "online-search-path",
     label: "Search online",
-    caption: "Look things up, then head to the library.",
+    caption: "Ask Baba and search online.",
     icon: "book",
   },
   {
@@ -119,7 +117,8 @@ const AFTER_SLEEP: AfterChoice[] = [
   },
 ];
 
-const UNCLE_SAMI_CHOICES: AfterChoice[] = [
+/** After search-online path (A1) — research goes to Finale B */
+const UNCLE_SAMI_CHOICES_RESEARCH: AfterChoice[] = [
   {
     slug: "uncle-sami-ask-book",
     label: "Ask for the book",
@@ -134,11 +133,28 @@ const UNCLE_SAMI_CHOICES: AfterChoice[] = [
   },
 ];
 
-const UNCLE_SAMI_FINALE: string[] = [
-  VIDEO_FILES.uncleSamiPickingUpBook,
-  VIDEO_FILES.readingBook,
-  VIDEO_FILES.talkingToAudience,
+/** After library walk-in (A2) or YouTube path (B1) — second path uses part 1 & 2 */
+const UNCLE_SAMI_CHOICES_PARTS: AfterChoice[] = [
+  {
+    slug: "uncle-sami-ask-book",
+    label: "Ask for the book",
+    caption: "Ask Uncle Sami for the book.",
+    icon: "book",
+  },
+  {
+    slug: "uncle-sami-parts-path",
+    label: "Talk with Uncle Sami",
+    caption: "Hear Uncle Sami’s story in two parts.",
+    icon: "chat",
+  },
 ];
+
+const FINALE_A: string[] = [
+  VIDEO_FILES.uncleSamiPickingUpBook,
+  VIDEO_FILES.uncleSamiSituation1And2Pt2,
+];
+
+const FINALE_B: string[] = [VIDEO_FILES.uncleSamiSituation1And2Pt2];
 
 export const WATCH_BY_SLUG: Record<WatchSlug, WatchEpisode> = {
   theodicy: {
@@ -146,36 +162,49 @@ export const WATCH_BY_SLUG: Record<WatchSlug, WatchEpisode> = {
     title: "Theodicy",
     synopsis:
       "If ALLAH is so powerfull , why does He not make everyone good?",
-    videoSrc: VIDEO_FILES.wakingUp,
-    videoSequence: [VIDEO_FILES.news],
-    afterChoices: BABA_CHOICES,
+    videoSrc: VIDEO_FILES.intro,
+    afterChoices: OPENING_CHOICES,
     funLevel: 5,
   },
   "baba-situation-1": {
     slug: "baba-situation-1",
-    title: "Baba Situation 1",
-    synopsis: "You chose the first path with Baba.",
+    title: "Discuss Question",
+    synopsis: "You chose to discuss the question with Baba.",
     videoSrc: VIDEO_FILES.babaSituation1,
     afterChoices: AFTER_BABA_SITUATION_1,
     funLevel: 5,
   },
   "baba-situation-2": {
     slug: "baba-situation-2",
-    title: "Baba Situation 2",
-    synopsis: "You chose the second path with Baba.",
+    title: "Avoid Question",
+    synopsis: "You chose to avoid the question for now.",
     videoSrc: VIDEO_FILES.babaSituation2,
     afterChoices: AFTER_BABA_SITUATION_2,
+    funLevel: 5,
+  },
+  "online-search-path": {
+    slug: "online-search-path",
+    title: "Search online",
+    synopsis: "You asked Baba and searched online.",
+    videoSrc: VIDEO_FILES.askFatherSearchesOnline,
+    afterChoices: UNCLE_SAMI_CHOICES_RESEARCH,
+    funLevel: 5,
+  },
+  "library-walk-in-path": {
+    slug: "library-walk-in-path",
+    title: "Library Walk In",
+    synopsis: "You walked into the library.",
+    videoSrc: VIDEO_FILES.libraryWalkIn,
+    afterChoices: UNCLE_SAMI_CHOICES_PARTS,
     funLevel: 5,
   },
   "watches-youtube-path": {
     slug: "watches-youtube-path",
     title: "Watches YouTube",
-    synopsis: "You watched videos online.",
-    videoSrc: VIDEO_FILES.walkingIn,
-    videoSequence: [
-      VIDEO_FILES.watchingCartoons,
-      VIDEO_FILES.searchOnlinePath1,
-    ],
+    synopsis: "You watched cartoons, then headed to the library.",
+    videoSrc: VIDEO_FILES.watchingCartoons,
+    videoSequence: [VIDEO_FILES.libraryWalk],
+    afterChoices: UNCLE_SAMI_CHOICES_PARTS,
     funLevel: 5,
   },
   "sleep-path": {
@@ -190,31 +219,14 @@ export const WATCH_BY_SLUG: Record<WatchSlug, WatchEpisode> = {
     slug: "allah-for-guidance",
     title: "Allah for guidance",
     synopsis: "You turned to Allah for guidance.",
-    videoSrc: VIDEO_FILES.prayerScene,
+    videoSrc: VIDEO_FILES.prayer,
     funLevel: 5,
   },
   "after-sleep-search-online": {
     slug: "after-sleep-search-online",
     title: "Search Online Path",
-    synopsis: "You searched online after waking from the dream.",
-    videoSrc: VIDEO_FILES.afterSleepSearchOnlinePath,
-    funLevel: 5,
-  },
-  "online-search-path": {
-    slug: "online-search-path",
-    title: "Search online",
-    synopsis: "You walked in, searched online, then entered the library.",
-    videoSrc: VIDEO_FILES.walkingIn,
-    videoSequence: [VIDEO_FILES.onlineSearch, VIDEO_FILES.libraryWalkIn],
-    afterChoices: UNCLE_SAMI_CHOICES,
-    funLevel: 5,
-  },
-  "library-walk-in-path": {
-    slug: "library-walk-in-path",
-    title: "Library Walk In",
-    synopsis: "You walked into the library.",
-    videoSrc: VIDEO_FILES.libraryWalkIn,
-    afterChoices: UNCLE_SAMI_CHOICES,
+    synopsis: "The dream guided you to search online.",
+    videoSrc: VIDEO_FILES.dreamGuideSearchOnline,
     funLevel: 5,
   },
   "uncle-sami-ask-book": {
@@ -222,15 +234,23 @@ export const WATCH_BY_SLUG: Record<WatchSlug, WatchEpisode> = {
     title: "Ask for the book",
     synopsis: "You asked Uncle Sami for the book.",
     videoSrc: VIDEO_FILES.uncleSamiSituation1,
-    videoSequence: UNCLE_SAMI_FINALE,
+    videoSequence: FINALE_A,
     funLevel: 5,
   },
   "uncle-sami-research": {
     slug: "uncle-sami-research",
     title: "Talk about his research",
     synopsis: "You talked with Uncle Sami about his research.",
-    videoSrc: VIDEO_FILES.uncleSamiSituation2,
-    videoSequence: UNCLE_SAMI_FINALE,
+    videoSrc: VIDEO_FILES.uncleSamiSituation2Pt1,
+    videoSequence: FINALE_B,
+    funLevel: 5,
+  },
+  "uncle-sami-parts-path": {
+    slug: "uncle-sami-parts-path",
+    title: "Talk with Uncle Sami",
+    synopsis: "You listened as Uncle Sami shared his story.",
+    videoSrc: VIDEO_FILES.uncleSamiSituation2Pt1,
+    videoSequence: FINALE_B,
     funLevel: 5,
   },
 };

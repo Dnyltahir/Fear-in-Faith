@@ -2,22 +2,26 @@
 
 Episode files in this folder are served at `/videos/...` and are **included in git** (keep each file under GitHub’s **100 MB** limit).
 
-## Main chapter
-- `Waking Up.mp4` — opening
-- `News.mp4` — continues after Waking Up
-- `Baba Situation 1.mp4` / `Baba Situation 2.mp4` — branch after News
+## Main chapter — Theodicy
+- `Intro.mp4` — opening
+- **Discuss Question** → Path A | **Avoid Question** → Path B
 
-## Baba Situation 2 branch
-- **Watches YouTube:** `Walking In.mp4` → `Watching Cartoons.mp4` → `SEARCH ONLINE PATH 1.MP4`
-- **Sleep:** `Dream Scene.mp4` → then:
-  - **Allah for guidance:** `Prayer Scene.mp4`
-  - **Search Online Path:** `after sleep search online path.MP4`
+## Path A — Discuss Question
+- `Baba Situation 1.mp4`
+- **Search online:** `Ask Father (I) to Searches Online.mp4` → Uncle Sami choices
+- **Library walk-in:** `Library Walk In.mp4` → Uncle Sami choices
 
-## Baba Situation 1 branch
-- **Search online:** `Walking In.mp4` → `Online Search.mp4` → `Library Walk In.mp4`
-- **Library walk-in:** `Library Walk In.mp4`
-- Then (both choices):
-  - **Ask for the book:** `Uncle Sami Situation 1.mp4` → `Uncle Sami Picking up Book.mp4` → `Reading Book.mp4` → `Talking to Audience.mp4`
-  - **Talk about his research:** `Uncle Sami Situation 2.mp4` → `Uncle Sami Picking up Book.mp4` → `Reading Book.mp4` → `Talking to Audience.mp4`
+### Uncle Sami (after search online)
+- **Ask for the book:** `Uncle Sami Situation 1.mp4` → `Uncle Sami Picking up Book.mp4` → `Uncle Sami Situation 1 + 2 - Pt 2.mp4`
+- **Talk about his research:** `Uncle Sami Situation 2 - Pt 1.mp4` → `Uncle Sami Situation 1 + 2 - Pt 2.mp4`
+
+### Uncle Sami (after library walk-in or YouTube path)
+- **Ask for the book:** same as above (Finale A)
+- **Talk with Uncle Sami:** `Uncle Sami Situation 2 - Pt 1.mp4` → `Uncle Sami Situation 1 + 2 - Pt 2.mp4`
+
+## Path B — Avoid Question
+- `Baba Situation 2.mp4`
+- **WATCHES YOUTUBE:** `Watching Cartoons.mp4` → `Library Walk.mp4` → Uncle Sami choices (same as library path)
+- **SLEEP:** `Dream Scene.mp4` → **Allah for guidance:** `Prayer.mp4` | **Search Online Path:** `Dream Guide to Search Online.mp4`
 
 Optional: keep extra copies in the repo’s top-level **`videos/`** folder; the app reads from **`Frontend/public/videos/`** here.
