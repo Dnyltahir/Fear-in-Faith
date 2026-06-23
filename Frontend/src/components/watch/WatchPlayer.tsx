@@ -16,6 +16,7 @@ export function WatchPlayer({ episode: initialEpisode }: { episode: WatchEpisode
   const playerRef = useRef<HTMLDivElement>(null);
   const hideControlsTimerRef = useRef<number | null>(null);
   const advancingSegmentRef = useRef(false);
+  const loadedSrcRef = useRef("");
   const [activeEpisode, setActiveEpisode] = useState(initialEpisode);
   const [showingCredits, setShowingCredits] = useState(false);
   const [showReplay, setShowReplay] = useState(false);
@@ -74,6 +75,7 @@ export function WatchPlayer({ episode: initialEpisode }: { episode: WatchEpisode
   }, [initialEpisode]);
 
   useEffect(() => {
+    loadedSrcRef.current = "";
     setSegmentIndex(0);
     watchedMs.current = 0;
     setShowChoices(false);
@@ -140,6 +142,7 @@ export function WatchPlayer({ episode: initialEpisode }: { episode: WatchEpisode
     setBuffering(true);
 
     const startPlayback = () => {
+      advancingSegmentRef.current = true;
       setBuffering(false);
       void v.play().catch(() => setPlaying(false));
       setPlaying(true);
@@ -147,12 +150,14 @@ export function WatchPlayer({ episode: initialEpisode }: { episode: WatchEpisode
 
     const onCanPlay = () => startPlayback();
 
-    if (v.getAttribute("src") !== currentSrc) {
+    const sourceChanged = loadedSrcRef.current !== currentSrc;
+    if (sourceChanged) {
+      loadedSrcRef.current = currentSrc;
       v.src = currentSrc;
+      v.currentTime = 0;
       v.load();
-    }
-
-    if (v.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA) {
+      v.addEventListener("canplay", onCanPlay, { once: true });
+    } else if (v.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA) {
       startPlayback();
     } else {
       v.addEventListener("canplay", onCanPlay, { once: true });
@@ -240,28 +245,33 @@ export function WatchPlayer({ episode: initialEpisode }: { episode: WatchEpisode
       return;
     }
 
-    const v = videoRef.current;
-    if (v && Number.isFinite(v.duration)) {
-      v.currentTime = Math.max(0, v.duration - 0.05);
-      v.pause();
-    }
-    setPlaying(false);
     if (activeEpisode.afterChoices?.length) {
+      const v = videoRef.current;
+      if (v && Number.isFinite(v.duration)) {
+        v.currentTime = Math.max(0, v.duration - 0.05);
+        v.pause();
+      }
+      setPlaying(false);
       setShowChoices(true);
       return;
     }
+
     if (!showingCredits) {
       advancingSegmentRef.current = true;
       clearHideControlsTimer();
       setShowControls(false);
+      loadedSrcRef.current = "";
       setShowingCredits(true);
       return;
     }
+
+    setPlaying(false);
     setShowReplay(true);
   }
 
   function handleReplay() {
     const introEpisode = WATCH_BY_SLUG.theodicy;
+    loadedSrcRef.current = "";
     setShowReplay(false);
     setShowingCredits(false);
     setShowChoices(false);
@@ -313,11 +323,16 @@ export function WatchPlayer({ episode: initialEpisode }: { episode: WatchEpisode
           {hasVideoSrc ? (
             <>
               <video
+                key={currentSrc}
                 ref={videoRef}
                 className={cn(
-                  "aspect-video w-full bg-black object-cover",
+                  "aspect-video w-full bg-black",
+                  showingCredits || showReplay ? "object-contain" : "object-cover",
                   showChoices && "pointer-events-none",
-                  isFullscreen && "aspect-auto h-full max-h-full w-full object-cover",
+                  isFullscreen &&
+                    "aspect-auto h-full max-h-full w-full",
+                  isFullscreen && !showingCredits && !showReplay && "object-cover",
+                  isFullscreen && (showingCredits || showReplay) && "object-contain",
                 )}
                 src={currentSrc}
                 preload="auto"
