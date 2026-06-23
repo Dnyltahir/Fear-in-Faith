@@ -1,10 +1,10 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { Loader2, Maximize, Minimize, Pause, Play } from "lucide-react";
+import { Loader2, Maximize, Minimize, Pause, Play, RotateCcw } from "lucide-react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { AfterChoice, WatchEpisode } from "@/lib/content";
-import { WATCH_BY_SLUG, getEpisodeVideoSegments } from "@/lib/content";
+import { WATCH_BY_SLUG, END_CREDITS_VIDEO, getEpisodeVideoSegments } from "@/lib/content";
 import { InteractiveChoiceOverlay } from "@/components/watch/InteractiveChoiceOverlay";
 import { cn } from "@/lib/utils";
 
@@ -17,7 +17,12 @@ export function WatchPlayer({ episode: initialEpisode }: { episode: WatchEpisode
   const hideControlsTimerRef = useRef<number | null>(null);
   const advancingSegmentRef = useRef(false);
   const [activeEpisode, setActiveEpisode] = useState(initialEpisode);
-  const segments = useMemo(() => getEpisodeVideoSegments(activeEpisode), [activeEpisode]);
+  const [showingCredits, setShowingCredits] = useState(false);
+  const [showReplay, setShowReplay] = useState(false);
+  const segments = useMemo(() => {
+    if (showingCredits) return [END_CREDITS_VIDEO];
+    return getEpisodeVideoSegments(activeEpisode);
+  }, [activeEpisode, showingCredits]);
   const [segmentIndex, setSegmentIndex] = useState(0);
   const currentSrc = segments[segmentIndex] ?? "";
   const hasVideoSrc = Boolean(currentSrc.trim());
@@ -30,6 +35,9 @@ export function WatchPlayer({ episode: initialEpisode }: { episode: WatchEpisode
   const watchedMs = useRef(0);
   const nextSrc = segments[segmentIndex + 1] ?? "";
   const isLastSegment = segmentIndex >= segments.length - 1;
+  const isTerminalEpisode = !activeEpisode.afterChoices?.length;
+  const creditsPrefetchSrc =
+    isLastSegment && isTerminalEpisode && !showingCredits ? END_CREDITS_VIDEO : "";
   const branchPrefetchSrcs = useMemo(() => {
     if (!isLastSegment || !activeEpisode.afterChoices?.length) return [];
     return activeEpisode.afterChoices
@@ -71,8 +79,18 @@ export function WatchPlayer({ episode: initialEpisode }: { episode: WatchEpisode
     setShowChoices(false);
     setShowBreak(false);
     setShowControls(false);
-    setPlaying(segments.length > 0);
-  }, [activeEpisode.slug, segments.length]);
+    setShowingCredits(false);
+    setShowReplay(false);
+    setPlaying(getEpisodeVideoSegments(activeEpisode).length > 0);
+  }, [activeEpisode.slug]);
+
+  useEffect(() => {
+    if (!showingCredits) return;
+    setSegmentIndex(0);
+    setShowChoices(false);
+    setShowControls(false);
+    setPlaying(true);
+  }, [showingCredits]);
 
   useEffect(() => {
     return () => clearHideControlsTimer();
@@ -113,7 +131,7 @@ export function WatchPlayer({ episode: initialEpisode }: { episode: WatchEpisode
   }, [showChoices]);
 
   useEffect(() => {
-    if (!hasVideoSrc || showChoices) return;
+    if (!hasVideoSrc || showChoices || showReplay) return;
     const v = videoRef.current;
     if (!v) return;
 
@@ -143,7 +161,7 @@ export function WatchPlayer({ episode: initialEpisode }: { episode: WatchEpisode
     return () => {
       v.removeEventListener("canplay", onCanPlay);
     };
-  }, [segmentIndex, currentSrc, hasVideoSrc, showChoices, clearHideControlsTimer]);
+  }, [segmentIndex, currentSrc, hasVideoSrc, showChoices, showReplay, clearHideControlsTimer]);
 
   useEffect(() => {
     const v = videoRef.current;
@@ -230,7 +248,29 @@ export function WatchPlayer({ episode: initialEpisode }: { episode: WatchEpisode
     setPlaying(false);
     if (activeEpisode.afterChoices?.length) {
       setShowChoices(true);
+      return;
     }
+    if (!showingCredits) {
+      advancingSegmentRef.current = true;
+      clearHideControlsTimer();
+      setShowControls(false);
+      setShowingCredits(true);
+      return;
+    }
+    setShowReplay(true);
+  }
+
+  function handleReplay() {
+    const introEpisode = WATCH_BY_SLUG.theodicy;
+    setShowReplay(false);
+    setShowingCredits(false);
+    setShowChoices(false);
+    setShowControls(false);
+    setShowBreak(false);
+    setSegmentIndex(0);
+    watchedMs.current = 0;
+    setActiveEpisode(introEpisode);
+    setPlaying(getEpisodeVideoSegments(introEpisode).length > 0);
   }
 
   function handleChoiceSelect(choice: AfterChoice) {
@@ -238,6 +278,8 @@ export function WatchPlayer({ episode: initialEpisode }: { episode: WatchEpisode
     if (!next) return;
     setShowChoices(false);
     setShowControls(false);
+    setShowingCredits(false);
+    setShowReplay(false);
     setActiveEpisode(next);
   }
 
@@ -254,7 +296,9 @@ export function WatchPlayer({ episode: initialEpisode }: { episode: WatchEpisode
         <div className="surface-card mb-6 text-right md:mb-8 tv:mb-10">
           <div className="surface-card__body py-4 md:py-5">
             <p className="type-label font-semibold text-[#9440DD]">IQRA</p>
-            <h1 className="type-h1 font-black text-slate-900">{activeEpisode.title}</h1>
+            <h1 className="type-h1 font-black text-slate-900">
+              {showReplay || showingCredits ? "Credits" : activeEpisode.title}
+            </h1>
           </div>
         </div>
 
@@ -312,6 +356,17 @@ export function WatchPlayer({ episode: initialEpisode }: { episode: WatchEpisode
                   playsInline
                 />
               ))}
+              {creditsPrefetchSrc ? (
+                <video
+                  key={`prefetch-${creditsPrefetchSrc}`}
+                  preload="auto"
+                  src={creditsPrefetchSrc}
+                  className="pointer-events-none absolute h-0 w-0 opacity-0"
+                  aria-hidden
+                  muted
+                  playsInline
+                />
+              ) : null}
               {buffering && !showChoices ? (
                 <div
                   className="pointer-events-none absolute inset-0 z-[5] flex items-center justify-center bg-black/35"
@@ -321,20 +376,34 @@ export function WatchPlayer({ episode: initialEpisode }: { episode: WatchEpisode
                   <Loader2 className="size-10 animate-spin text-white/90 sm:size-12" aria-hidden />
                 </div>
               ) : null}
-              <button
-                type="button"
-                onClick={() => void toggleFullscreen()}
-                className={cn(
-                  "btn-touch absolute right-2 top-2 z-10 inline-flex size-8 items-center justify-center rounded-lg bg-black/55 text-white ring-1 ring-white/20 backdrop-blur-sm transition-colors hover:bg-black/75 sm:right-3 sm:top-3 sm:size-9",
-                  isFullscreen && "hidden",
-                  controlsClassName,
-                )}
-                aria-label="Enter fullscreen"
-              >
-                <Maximize className="size-4 sm:size-[1.125rem]" aria-hidden />
-              </button>
+              {showReplay ? (
+                <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/55 backdrop-blur-[2px]">
+                  <button
+                    type="button"
+                    onClick={handleReplay}
+                    className="btn-touch inline-flex min-w-[10rem] items-center justify-center gap-2 rounded-2xl bg-[#9440DD] px-6 py-3 text-base font-bold text-white shadow-lg shadow-[#9440DD]/35 transition-colors hover:bg-[#7a32bd] sm:min-w-[11rem] sm:px-8 sm:py-3.5 sm:text-lg"
+                  >
+                    <RotateCcw className="size-5 sm:size-6" aria-hidden />
+                    Replay
+                  </button>
+                </div>
+              ) : null}
+              {!showReplay ? (
+                <button
+                  type="button"
+                  onClick={() => void toggleFullscreen()}
+                  className={cn(
+                    "btn-touch absolute right-2 top-2 z-10 inline-flex size-8 items-center justify-center rounded-lg bg-black/55 text-white ring-1 ring-white/20 backdrop-blur-sm transition-colors hover:bg-black/75 sm:right-3 sm:top-3 sm:size-9",
+                    isFullscreen && "hidden",
+                    controlsClassName,
+                  )}
+                  aria-label="Enter fullscreen"
+                >
+                  <Maximize className="size-4 sm:size-[1.125rem]" aria-hidden />
+                </button>
+              ) : null}
 
-              {isFullscreen && !showChoices ? (
+              {isFullscreen && !showChoices && !showReplay ? (
                 <div
                   className={cn(
                     "absolute inset-x-0 bottom-0 z-30 flex flex-col items-center pointer-events-none",
@@ -402,17 +471,34 @@ export function WatchPlayer({ episode: initialEpisode }: { episode: WatchEpisode
           </AnimatePresence>
         </div>
 
-        <p className="type-body mt-4 text-white md:mt-6 lg:max-w-4xl xl:max-w-5xl tv:mt-8">{activeEpisode.synopsis}</p>
+        <p className="type-body mt-4 text-white md:mt-6 lg:max-w-4xl xl:max-w-5xl tv:mt-8">
+          {showReplay
+            ? "Watch again from the beginning?"
+            : showingCredits
+              ? "Thank you for watching."
+              : activeEpisode.synopsis}
+        </p>
 
         {hasVideoSrc && !isFullscreen ? (
           <div
             className={cn(
               "mt-8 flex flex-wrap items-center justify-center gap-3 md:mt-10 md:gap-4 lg:mt-12 lg:gap-5 tv:mt-14",
-              controlsClassName,
+              showReplay ? "opacity-100" : controlsClassName,
             )}
-            onMouseMove={revealControls}
-            onTouchStart={revealControls}
+            onMouseMove={showReplay ? undefined : revealControls}
+            onTouchStart={showReplay ? undefined : revealControls}
           >
+            {showReplay ? (
+              <button
+                type="button"
+                onClick={handleReplay}
+                className="btn-touch btn-primary min-w-[10rem] gap-2 px-6 text-sm md:min-w-[11rem] md:px-8 md:text-base"
+              >
+                <RotateCcw className="size-5 md:size-5" aria-hidden />
+                Replay
+              </button>
+            ) : (
+              <>
             <button
               type="button"
               onClick={togglePlay}
@@ -436,6 +522,8 @@ export function WatchPlayer({ episode: initialEpisode }: { episode: WatchEpisode
               <Maximize className="size-4 md:size-[1.125rem]" aria-hidden />
               Full screen
             </button>
+              </>
+            )}
           </div>
         ) : null}
         </div>

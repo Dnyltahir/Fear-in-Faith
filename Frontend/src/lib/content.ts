@@ -13,11 +13,16 @@ export const VIDEO_FILES = {
   watchingCartoons: videoPath("Watching Cartoons.mp4"),
   dreamScene: videoPath("Dream Scene.mp4"),
   prayer: videoPath("Prayer.mp4"),
+  prayerToLibrary: videoPath("Prayer to Library.mp4"),
+  prayerToSearchOnline: videoPath("Prayer to Search Online.mp4"),
   dreamGuideSearchOnline: videoPath("Dream Guide to Search Online.mp4"),
   uncleSamiSituation1Pt1: videoPath("Uncle Sami Situation 1 - Pt 1.mp4"),
   uncleSamiSituation1And2Pt2: videoPath("Uncle Sami Situation 1 + 2 - Pt 2.mp4"),
   uncleSamiSituation2Pt1: videoPath("Uncle Sami Situation 2 - Pt 1.mp4"),
 } as const;
+
+/** Played automatically after any story ending (no further choices). */
+export const END_CREDITS_VIDEO = videoPath("End Credits.mp4");
 
 /** Static art for the IQRA / Theodicy shelf card (hover plays episode preview) */
 export const IQRA_EPISODE_THUMBNAIL = "/images/iqra-show-watermark.jpg";
@@ -31,7 +36,9 @@ export type WatchSlug =
   | "watches-youtube-path"
   | "sleep-path"
   | "allah-for-guidance"
-  | "after-sleep-search-online"
+  | "prayer-to-library"
+  | "prayer-to-search-online"
+  | "sleep-search-online"
   | "uncle-sami-ask-book"
   | "uncle-sami-research"
   | "uncle-sami-parts-path";
@@ -108,9 +115,24 @@ const AFTER_SLEEP: AfterChoice[] = [
     icon: "book",
   },
   {
-    slug: "after-sleep-search-online",
-    label: "Search Online Path",
-    caption: "Search online for answers.",
+    slug: "sleep-search-online",
+    label: "Search online",
+    caption: "Search online for answers, then go to the library.",
+    icon: "chat",
+  },
+];
+
+const AFTER_PRAYER: AfterChoice[] = [
+  {
+    slug: "prayer-to-library",
+    label: "Go to library",
+    caption: "Go to the library after prayer.",
+    icon: "book",
+  },
+  {
+    slug: "prayer-to-search-online",
+    label: "Search Online",
+    caption: "Search online after prayer.",
     icon: "chat",
   },
 ];
@@ -208,32 +230,50 @@ export const WATCH_BY_SLUG: Record<WatchSlug, WatchEpisode> = {
     title: "Allah for guidance",
     synopsis: "You turned to Allah for guidance.",
     videoSrc: VIDEO_FILES.prayer,
+    afterChoices: AFTER_PRAYER,
   },
-  "after-sleep-search-online": {
-    slug: "after-sleep-search-online",
-    title: "Search Online Path",
-    synopsis: "The dream guided you to search online.",
+  "prayer-to-library": {
+    slug: "prayer-to-library",
+    title: "Go to library",
+    synopsis: "After prayer, you went to the library.",
+    videoSrc: VIDEO_FILES.prayerToLibrary,
+    afterChoices: UNCLE_SAMI_CHOICES_RESEARCH,
+  },
+  "prayer-to-search-online": {
+    slug: "prayer-to-search-online",
+    title: "Search Online",
+    synopsis: "After prayer, you searched online and walked to the library.",
+    videoSrc: VIDEO_FILES.prayerToSearchOnline,
+    videoSequence: [VIDEO_FILES.libraryWalk],
+    afterChoices: UNCLE_SAMI_CHOICES_RESEARCH,
+  },
+  "sleep-search-online": {
+    slug: "sleep-search-online",
+    title: "Search online",
+    synopsis: "The dream guided you to search online, then to the library.",
     videoSrc: VIDEO_FILES.dreamGuideSearchOnline,
+    videoSequence: [VIDEO_FILES.libraryWalk],
+    afterChoices: UNCLE_SAMI_CHOICES_RESEARCH,
   },
   "uncle-sami-ask-book": {
     slug: "uncle-sami-ask-book",
     title: "Ask for the book",
     synopsis: "You asked Uncle Sami for the book.",
-    videoSrc: VIDEO_FILES.uncleSamiSituation1Pt1,
+    videoSrc: VIDEO_FILES.uncleSamiSituation2Pt1,
     videoSequence: FINALE_A,
   },
   "uncle-sami-research": {
     slug: "uncle-sami-research",
     title: "Talk about his research",
     synopsis: "You talked with Uncle Sami about his research.",
-    videoSrc: VIDEO_FILES.uncleSamiSituation2Pt1,
+    videoSrc: VIDEO_FILES.uncleSamiSituation1Pt1,
     videoSequence: FINALE_B,
   },
   "uncle-sami-parts-path": {
     slug: "uncle-sami-parts-path",
     title: "Talk with Uncle Sami",
     synopsis: "You listened as Uncle Sami shared his story.",
-    videoSrc: VIDEO_FILES.uncleSamiSituation2Pt1,
+    videoSrc: VIDEO_FILES.uncleSamiSituation1Pt1,
     videoSequence: FINALE_B,
   },
 };
