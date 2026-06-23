@@ -14,10 +14,9 @@ export const VIDEO_FILES = {
   dreamScene: videoPath("Dream Scene.mp4"),
   prayer: videoPath("Prayer.mp4"),
   dreamGuideSearchOnline: videoPath("Dream Guide to Search Online.mp4"),
-  uncleSamiSituation1: videoPath("Uncle Sami Situation 1.mp4"),
+  uncleSamiSituation1Pt1: videoPath("Uncle Sami Situation 1 - Pt 1.mp4"),
   uncleSamiSituation1And2Pt2: videoPath("Uncle Sami Situation 1 + 2 - Pt 2.mp4"),
   uncleSamiSituation2Pt1: videoPath("Uncle Sami Situation 2 - Pt 1.mp4"),
-  uncleSamiPickingUpBook: videoPath("Uncle Sami Picking up Book.mp4"),
 } as const;
 
 /** Static art for the IQRA / Theodicy shelf card (hover plays episode preview) */
@@ -149,10 +148,7 @@ const UNCLE_SAMI_CHOICES_PARTS: AfterChoice[] = [
   },
 ];
 
-const FINALE_A: string[] = [
-  VIDEO_FILES.uncleSamiPickingUpBook,
-  VIDEO_FILES.uncleSamiSituation1And2Pt2,
-];
+const FINALE_A: string[] = [VIDEO_FILES.uncleSamiSituation1And2Pt2];
 
 const FINALE_B: string[] = [VIDEO_FILES.uncleSamiSituation1And2Pt2];
 
@@ -233,7 +229,7 @@ export const WATCH_BY_SLUG: Record<WatchSlug, WatchEpisode> = {
     slug: "uncle-sami-ask-book",
     title: "Ask for the book",
     synopsis: "You asked Uncle Sami for the book.",
-    videoSrc: VIDEO_FILES.uncleSamiSituation1,
+    videoSrc: VIDEO_FILES.uncleSamiSituation1Pt1,
     videoSequence: FINALE_A,
     funLevel: 5,
   },

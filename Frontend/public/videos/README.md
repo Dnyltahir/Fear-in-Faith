@@ -12,7 +12,7 @@ Episode files in this folder are served at `/videos/...` and are **included in g
 - **Library walk-in:** `Library Walk In.mp4` → Uncle Sami choices
 
 ### Uncle Sami (after search online)
-- **Ask for the book:** `Uncle Sami Situation 1.mp4` → `Uncle Sami Picking up Book.mp4` → `Uncle Sami Situation 1 + 2 - Pt 2.mp4`
+- **Ask for the book:** `Uncle Sami Situation 1 - Pt 1.mp4` → `Uncle Sami Situation 1 + 2 - Pt 2.mp4`
 - **Talk about his research:** `Uncle Sami Situation 2 - Pt 1.mp4` → `Uncle Sami Situation 1 + 2 - Pt 2.mp4`
 
 ### Uncle Sami (after library walk-in or YouTube path)

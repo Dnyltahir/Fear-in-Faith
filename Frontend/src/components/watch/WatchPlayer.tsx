@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { Maximize, Minimize, Pause, Play } from "lucide-react";
+import { Loader2, Maximize, Minimize, Pause, Play } from "lucide-react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { AfterChoice, WatchEpisode } from "@/lib/content";
 import { WATCH_BY_SLUG, getEpisodeVideoSegments } from "@/lib/content";
@@ -26,7 +26,18 @@ export function WatchPlayer({ episode: initialEpisode }: { episode: WatchEpisode
   const [showChoices, setShowChoices] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [showControls, setShowControls] = useState(false);
+  const [buffering, setBuffering] = useState(false);
   const watchedMs = useRef(0);
+  const nextSrc = segments[segmentIndex + 1] ?? "";
+  const isLastSegment = segmentIndex >= segments.length - 1;
+  const branchPrefetchSrcs = useMemo(() => {
+    if (!isLastSegment || !activeEpisode.afterChoices?.length) return [];
+    return activeEpisode.afterChoices
+      .map((choice) => WATCH_BY_SLUG[choice.slug])
+      .filter((episode): episode is WatchEpisode => Boolean(episode))
+      .map((episode) => getEpisodeVideoSegments(episode)[0])
+      .filter(Boolean);
+  }, [activeEpisode.afterChoices, isLastSegment]);
 
   const clearHideControlsTimer = useCallback(() => {
     if (hideControlsTimerRef.current !== null) {
@@ -105,11 +116,50 @@ export function WatchPlayer({ episode: initialEpisode }: { episode: WatchEpisode
     if (!hasVideoSrc || showChoices) return;
     const v = videoRef.current;
     if (!v) return;
+
     clearHideControlsTimer();
     setShowControls(false);
-    void v.play().catch(() => {});
-    setPlaying(true);
-  }, [segmentIndex, hasVideoSrc, showChoices, clearHideControlsTimer]);
+    setBuffering(true);
+
+    const startPlayback = () => {
+      setBuffering(false);
+      void v.play().catch(() => setPlaying(false));
+      setPlaying(true);
+    };
+
+    const onCanPlay = () => startPlayback();
+
+    if (v.getAttribute("src") !== currentSrc) {
+      v.src = currentSrc;
+      v.load();
+    }
+
+    if (v.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA) {
+      startPlayback();
+    } else {
+      v.addEventListener("canplay", onCanPlay, { once: true });
+    }
+
+    return () => {
+      v.removeEventListener("canplay", onCanPlay);
+    };
+  }, [segmentIndex, currentSrc, hasVideoSrc, showChoices, clearHideControlsTimer]);
+
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+
+    const onWaiting = () => setBuffering(true);
+    const onPlaying = () => setBuffering(false);
+
+    v.addEventListener("waiting", onWaiting);
+    v.addEventListener("playing", onPlaying);
+
+    return () => {
+      v.removeEventListener("waiting", onWaiting);
+      v.removeEventListener("playing", onPlaying);
+    };
+  }, [currentSrc]);
 
   useEffect(() => {
     if (!hasVideoSrc) return;
@@ -219,7 +269,6 @@ export function WatchPlayer({ episode: initialEpisode }: { episode: WatchEpisode
           {hasVideoSrc ? (
             <>
               <video
-                key={`${activeEpisode.slug}-${segmentIndex}`}
                 ref={videoRef}
                 className={cn(
                   "aspect-video w-full bg-black object-cover",
@@ -227,12 +276,13 @@ export function WatchPlayer({ episode: initialEpisode }: { episode: WatchEpisode
                   isFullscreen && "aspect-auto h-full max-h-full w-full object-cover",
                 )}
                 src={currentSrc}
-                autoPlay
+                preload="auto"
                 playsInline
                 controls={false}
                 onPlay={() => {
                   advancingSegmentRef.current = false;
                   setPlaying(true);
+                  setBuffering(false);
                 }}
                 onPause={() => {
                   if (advancingSegmentRef.current) return;
@@ -240,6 +290,37 @@ export function WatchPlayer({ episode: initialEpisode }: { episode: WatchEpisode
                 }}
                 onEnded={onVideoEnded}
               />
+              {nextSrc ? (
+                <video
+                  key={`prefetch-${nextSrc}`}
+                  preload="auto"
+                  src={nextSrc}
+                  className="pointer-events-none absolute h-0 w-0 opacity-0"
+                  aria-hidden
+                  muted
+                  playsInline
+                />
+              ) : null}
+              {branchPrefetchSrcs.map((src) => (
+                <video
+                  key={`branch-prefetch-${src}`}
+                  preload="auto"
+                  src={src}
+                  className="pointer-events-none absolute h-0 w-0 opacity-0"
+                  aria-hidden
+                  muted
+                  playsInline
+                />
+              ))}
+              {buffering && !showChoices ? (
+                <div
+                  className="pointer-events-none absolute inset-0 z-[5] flex items-center justify-center bg-black/35"
+                  aria-live="polite"
+                  aria-label="Loading video"
+                >
+                  <Loader2 className="size-10 animate-spin text-white/90 sm:size-12" aria-hidden />
+                </div>
+              ) : null}
               <button
                 type="button"
                 onClick={() => void toggleFullscreen()}

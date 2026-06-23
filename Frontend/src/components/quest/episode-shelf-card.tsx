@@ -23,6 +23,8 @@ export function EpisodeShelfCard({ episode, thumbnailSrc, accentClass }: Props) 
     setPreview(true);
     const v = videoRef.current;
     if (!v) return;
+    v.preload = "auto";
+    v.load();
     void v.play().catch(() => {});
   }, [hasVideoSrc]);
 
