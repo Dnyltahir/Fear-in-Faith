@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { BookOpen, MessagesSquare } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { AfterChoice } from "@/lib/content";
 import { cn } from "@/lib/utils";
 import { ChoiceTimerBar } from "@/components/watch/ChoiceTimerBar";
@@ -29,19 +29,30 @@ type Props = {
 export function InteractiveChoiceOverlay({ choices, onSelect }: Props) {
   const [timeLeftPct, setTimeLeftPct] = useState(100);
   const [urgent, setUrgent] = useState(false);
+  const onSelectRef = useRef(onSelect);
+  onSelectRef.current = onSelect;
 
   useEffect(() => {
+    if (!choices.length) return;
+
     const durationMs = CHOICE_SECONDS * 1000;
     const t0 = Date.now();
+    let autoSelected = false;
+
     const id = window.setInterval(() => {
       const elapsed = Date.now() - t0;
       const pct = Math.max(0, 100 - (elapsed / durationMs) * 100);
       setTimeLeftPct(pct);
       if (pct < 28) setUrgent(true);
-      if (elapsed >= durationMs) window.clearInterval(id);
+      if (elapsed >= durationMs && !autoSelected) {
+        autoSelected = true;
+        window.clearInterval(id);
+        onSelectRef.current(choices[0]);
+      }
     }, 40);
+
     return () => window.clearInterval(id);
-  }, []);
+  }, [choices]);
 
   return (
     <div
