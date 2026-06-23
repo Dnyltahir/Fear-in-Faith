@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useRef, useState } from "react";
 import type { WatchEpisode } from "@/lib/content";
-import { FunMeter } from "@/components/quest/fun-meter";
 import { cn } from "@/lib/utils";
 
 type Props = {
@@ -90,11 +89,6 @@ export function EpisodeShelfCard({ episode, thumbnailSrc, accentClass }: Props) 
         </div>
 
         <p className="type-body mt-3 text-slate-600">{episode.synopsis}</p>
-
-        <div className="mt-4 flex flex-wrap items-center gap-3">
-          <p className="type-label font-semibold text-slate-600">Fun meter</p>
-          <FunMeter level={episode.funLevel} />
-        </div>
 
         <Link
           href={`/watch/${episode.slug}`}

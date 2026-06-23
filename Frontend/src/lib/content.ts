@@ -53,7 +53,6 @@ export type WatchEpisode = {
   videoSequence?: string[];
   /** Shown after the final segment ends */
   afterChoices?: AfterChoice[];
-  funLevel: 0 | 1 | 2 | 3 | 4 | 5;
 };
 
 const OPENING_CHOICES: AfterChoice[] = [
@@ -160,7 +159,6 @@ export const WATCH_BY_SLUG: Record<WatchSlug, WatchEpisode> = {
       "If ALLAH is so powerfull , why does He not make everyone good?",
     videoSrc: VIDEO_FILES.intro,
     afterChoices: OPENING_CHOICES,
-    funLevel: 5,
   },
   "baba-situation-1": {
     slug: "baba-situation-1",
@@ -168,7 +166,6 @@ export const WATCH_BY_SLUG: Record<WatchSlug, WatchEpisode> = {
     synopsis: "You chose to discuss the question with Baba.",
     videoSrc: VIDEO_FILES.babaSituation1,
     afterChoices: AFTER_BABA_SITUATION_1,
-    funLevel: 5,
   },
   "baba-situation-2": {
     slug: "baba-situation-2",
@@ -176,7 +173,6 @@ export const WATCH_BY_SLUG: Record<WatchSlug, WatchEpisode> = {
     synopsis: "You chose to avoid the question for now.",
     videoSrc: VIDEO_FILES.babaSituation2,
     afterChoices: AFTER_BABA_SITUATION_2,
-    funLevel: 5,
   },
   "online-search-path": {
     slug: "online-search-path",
@@ -184,7 +180,6 @@ export const WATCH_BY_SLUG: Record<WatchSlug, WatchEpisode> = {
     synopsis: "You asked Baba and searched online.",
     videoSrc: VIDEO_FILES.askFatherSearchesOnline,
     afterChoices: UNCLE_SAMI_CHOICES_RESEARCH,
-    funLevel: 5,
   },
   "library-walk-in-path": {
     slug: "library-walk-in-path",
@@ -192,7 +187,6 @@ export const WATCH_BY_SLUG: Record<WatchSlug, WatchEpisode> = {
     synopsis: "You walked into the library.",
     videoSrc: VIDEO_FILES.libraryWalkIn,
     afterChoices: UNCLE_SAMI_CHOICES_PARTS,
-    funLevel: 5,
   },
   "watches-youtube-path": {
     slug: "watches-youtube-path",
@@ -201,7 +195,6 @@ export const WATCH_BY_SLUG: Record<WatchSlug, WatchEpisode> = {
     videoSrc: VIDEO_FILES.watchingCartoons,
     videoSequence: [VIDEO_FILES.libraryWalk],
     afterChoices: UNCLE_SAMI_CHOICES_PARTS,
-    funLevel: 5,
   },
   "sleep-path": {
     slug: "sleep-path",
@@ -209,21 +202,18 @@ export const WATCH_BY_SLUG: Record<WatchSlug, WatchEpisode> = {
     synopsis: "You went to sleep.",
     videoSrc: VIDEO_FILES.dreamScene,
     afterChoices: AFTER_SLEEP,
-    funLevel: 5,
   },
   "allah-for-guidance": {
     slug: "allah-for-guidance",
     title: "Allah for guidance",
     synopsis: "You turned to Allah for guidance.",
     videoSrc: VIDEO_FILES.prayer,
-    funLevel: 5,
   },
   "after-sleep-search-online": {
     slug: "after-sleep-search-online",
     title: "Search Online Path",
     synopsis: "The dream guided you to search online.",
     videoSrc: VIDEO_FILES.dreamGuideSearchOnline,
-    funLevel: 5,
   },
   "uncle-sami-ask-book": {
     slug: "uncle-sami-ask-book",
@@ -231,7 +221,6 @@ export const WATCH_BY_SLUG: Record<WatchSlug, WatchEpisode> = {
     synopsis: "You asked Uncle Sami for the book.",
     videoSrc: VIDEO_FILES.uncleSamiSituation1Pt1,
     videoSequence: FINALE_A,
-    funLevel: 5,
   },
   "uncle-sami-research": {
     slug: "uncle-sami-research",
@@ -239,7 +228,6 @@ export const WATCH_BY_SLUG: Record<WatchSlug, WatchEpisode> = {
     synopsis: "You talked with Uncle Sami about his research.",
     videoSrc: VIDEO_FILES.uncleSamiSituation2Pt1,
     videoSequence: FINALE_B,
-    funLevel: 5,
   },
   "uncle-sami-parts-path": {
     slug: "uncle-sami-parts-path",
@@ -247,7 +235,6 @@ export const WATCH_BY_SLUG: Record<WatchSlug, WatchEpisode> = {
     synopsis: "You listened as Uncle Sami shared his story.",
     videoSrc: VIDEO_FILES.uncleSamiSituation2Pt1,
     videoSequence: FINALE_B,
-    funLevel: 5,
   },
 };
 
