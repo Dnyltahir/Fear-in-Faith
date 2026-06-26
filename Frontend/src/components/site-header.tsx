@@ -31,23 +31,23 @@ export function SiteHeader() {
         )}
       >
         <div className="h-0.5 bg-gradient-to-r from-[#9440DD] via-[#FFDE59] to-[#9440DD]" aria-hidden />
-        <div className="site-container flex h-[var(--site-header-height)] items-center justify-between gap-3 md:gap-5">
+        <div className="site-container relative flex h-[var(--site-header-height)] items-center">
           <Link
             href="/"
-            className="flex h-full min-w-0 flex-1 items-center justify-start md:max-w-[58%]"
+            className="relative z-10 flex h-full min-w-0 items-center"
           >
             <Image
               src="/images/wordmark.png"
               alt="DAWA-HI"
-              width={720}
-              height={180}
+              width={900}
+              height={220}
               priority
-              className="block h-[3.25rem] w-auto max-h-[3.25rem] max-w-[min(78vw,420px)] object-contain object-left sm:h-[3.75rem] sm:max-h-[3.75rem] sm:max-w-[min(72vw,480px)] md:h-[4.5rem] md:max-h-[4.5rem] md:max-w-[540px] lg:h-20 lg:max-h-20 lg:max-w-[620px] xl:h-[5.5rem] xl:max-h-[5.5rem] xl:max-w-[700px] 2xl:h-24 2xl:max-h-24 2xl:max-w-[780px] tv:h-28 tv:max-h-28 tv:max-w-[900px] tv-xl:h-32 tv-xl:max-h-32 tv-xl:max-w-[1000px]"
+              className="block h-[3.75rem] w-auto max-h-[3.75rem] max-w-[min(52vw,480px)] object-contain object-left sm:h-[4.5rem] sm:max-h-[4.5rem] sm:max-w-[min(48vw,560px)] md:h-[5.25rem] md:max-h-[5.25rem] md:max-w-[640px] lg:h-24 lg:max-h-24 lg:max-w-[720px] xl:h-28 xl:max-h-28 xl:max-w-[820px] 2xl:h-32 2xl:max-h-32 2xl:max-w-[920px] tv:h-36 tv:max-h-36 tv:max-w-[1040px] tv-xl:h-40 tv-xl:max-h-40 tv-xl:max-w-[1160px]"
             />
           </Link>
 
           <nav
-            className="flex items-center rounded-xl bg-slate-100/90 p-1 ring-1 ring-slate-200/80 md:rounded-2xl md:p-1.5"
+            className="absolute left-1/2 top-1/2 z-20 flex -translate-x-1/2 -translate-y-1/2 items-center rounded-xl bg-slate-100/90 p-1 ring-1 ring-slate-200/80 md:rounded-2xl md:p-1.5"
             aria-label="Main"
           >
             {NAV.map(({ href, label }) => {
