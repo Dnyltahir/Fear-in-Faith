@@ -300,7 +300,7 @@ export function RoundTable() {
             </div>
             <div>
               <p className="type-label font-semibold text-slate-800">
-                <span className="badge-yellow">Round Table</span>
+                <span className="badge-yellow">Safe Space</span>
               </p>
               <h2 className="type-h2 mt-1.5 font-black text-slate-900">Live scholar chat</h2>
               <p className="type-body mt-1 text-slate-600">
@@ -344,7 +344,7 @@ export function RoundTable() {
           ref={scrollRef}
           className="max-h-[min(48vh,480px)] flex-1 space-y-3 overflow-y-auto scroll-smooth px-4 py-4 md:max-h-[min(54vh,580px)] md:px-5 md:py-5 lg:max-h-[min(58vh,680px)]"
           role="log"
-          aria-label="Round Table conversation"
+          aria-label="Safe Space conversation"
           aria-live="polite"
         >
           <AnimatePresence mode="popLayout">
@@ -396,7 +396,7 @@ export function RoundTable() {
             }}
           >
             <label htmlFor="round-table-chat" className="sr-only">
-              Message scholars at the Round Table
+              Message scholars in Safe Space
             </label>
             <input
               ref={inputRef}

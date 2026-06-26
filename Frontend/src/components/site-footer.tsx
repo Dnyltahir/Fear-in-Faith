@@ -8,8 +8,8 @@ const LINKS = [
 ] as const;
 
 const HIGHLIGHTS = [
-  { icon: Tv, label: "Discovery Zone" },
-  { icon: MessageCircle, label: "Round Table" },
+  { icon: Tv, label: "Story Mode" },
+  { icon: MessageCircle, label: "Safe Space" },
   { icon: Sparkles, label: "Safe by design" },
 ] as const;
 

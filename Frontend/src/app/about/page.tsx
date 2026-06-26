@@ -10,12 +10,12 @@ export const metadata = {
 const FEATURES = [
   {
     icon: Tv,
-    title: "Discovery Zone",
+    title: "Story Mode",
     body: "Watch episodes built for families learning together.",
   },
   {
     icon: MessageCircle,
-    title: "Round Table",
+    title: "Safe Space",
     body: "Connect with scholars in a moderated Q&A space.",
   },
   {
@@ -36,7 +36,7 @@ export default function AboutPage() {
           </h1>
           <p className="type-body-lg mt-5 max-w-3xl text-slate-700">
             DAWA-HI is a gentle home for families exploring faith together. We
-            combine IQRA storytelling with a moderated Round Table where children
+            combine IQRA storytelling with a moderated Safe Space where children
             and parents can ask big questions and hear from verified guides.
           </p>
           <p className="type-body mt-4 max-w-3xl text-slate-600">

@@ -106,7 +106,7 @@ export function AskQuestionModal({ open, onOpenChange, onPost }: Props) {
                   }}
                   className="btn-touch flex-1 rounded-2xl bg-[#9440DD] text-base font-bold text-white shadow-lg shadow-[#9440DD]/25 transition-colors hover:bg-[#7a32bd] disabled:cursor-not-allowed disabled:opacity-50 md:text-lg lg:text-xl"
                 >
-                  Post to the Round Table
+                  Post to Safe Space
                 </button>
               </div>
             </div>

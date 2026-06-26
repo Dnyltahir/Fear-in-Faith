@@ -35,7 +35,7 @@ export function DiscoveryZone() {
         className="surface-card surface-card--elevated overflow-hidden"
       >
         <div className="surface-card__body bg-[#FFDE59] pb-0 text-center text-[#9440DD] md:pb-2">
-          <p className="type-label font-semibold">Discovery Zone</p>
+          <p className="type-label font-semibold">Story Mode</p>
           <h2
             id="discovery-welcome-title"
             className="type-hero mt-2 font-black"

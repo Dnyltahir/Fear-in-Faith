@@ -43,14 +43,14 @@ export function SafeDock() {
                 className="btn-touch min-h-[2.625rem] flex-1 gap-1.5 rounded-lg px-2 py-2 text-[0.8125rem] font-semibold md:min-h-[2.875rem] md:gap-2 md:px-4 md:py-2.5 md:text-[0.9375rem] lg:min-h-[3rem] lg:text-base xl:min-h-[3.25rem] xl:text-lg tv:min-h-[3.75rem] tv:gap-3 tv:text-xl"
               >
                 <Tv className="size-4 shrink-0 md:size-[1.125rem] lg:size-5 xl:size-6 tv:size-7" aria-hidden />
-                <span className="truncate">Discovery Zone</span>
+                <span className="truncate">Story Mode</span>
               </TabsTrigger>
               <TabsTrigger
                 value="community"
                 className="btn-touch min-h-[2.625rem] flex-1 gap-1.5 rounded-lg px-2 py-2 text-[0.8125rem] font-semibold md:min-h-[2.875rem] md:gap-2 md:px-4 md:py-2.5 md:text-[0.9375rem] lg:min-h-[3rem] lg:text-base xl:min-h-[3.25rem] xl:text-lg tv:min-h-[3.75rem] tv:gap-3 tv:text-xl"
               >
                 <MessageCircle className="size-4 shrink-0 md:size-[1.125rem] lg:size-5 xl:size-6 tv:size-7" aria-hidden />
-                <span className="truncate">Round Table</span>
+                <span className="truncate">Safe Space</span>
               </TabsTrigger>
             </TabsList>
           </div>

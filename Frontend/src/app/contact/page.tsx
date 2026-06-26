@@ -17,7 +17,7 @@ export default function ContactPage() {
             We&apos;d love to hear from you
           </h1>
           <p className="type-body-lg mt-5 max-w-3xl text-slate-700">
-            Questions about IQRA, the Round Table, or partnering with DAWA-HI?
+            Questions about IQRA, Safe Space, or partnering with DAWA-HI?
             Send us a note and a member of our team will respond when they can.
           </p>
 

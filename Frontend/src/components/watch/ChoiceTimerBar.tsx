@@ -18,7 +18,6 @@ export function ChoiceTimerBar({ progressPct }: Props) {
       aria-label="Time left to choose"
     >
       <div className="relative z-[1] h-4 w-full sm:h-5 lg:h-6 xl:h-7 tv:h-8 tv-xl:h-10">
-      >
         <div className="absolute inset-0 rounded-full bg-[#FFDE59]" />
         <div
           className="absolute inset-y-0 right-0 rounded-full bg-[#9440DD] transition-[left] duration-75 ease-linear"
