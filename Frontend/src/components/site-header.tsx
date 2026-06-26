@@ -42,7 +42,7 @@ export function SiteHeader() {
               width={6928}
               height={1299}
               priority
-              className="block h-[3.75rem] w-auto max-h-[3.75rem] max-w-[min(70vw,520px)] object-contain object-left sm:h-[4.5rem] sm:max-h-[4.5rem] sm:max-w-[min(65vw,620px)] md:h-[5.25rem] md:max-h-[5.25rem] md:max-w-[720px] lg:h-24 lg:max-h-24 lg:max-w-[820px] xl:h-28 xl:max-h-28 xl:max-w-[940px] 2xl:h-32 2xl:max-h-32 2xl:max-w-[1060px] tv:h-36 tv:max-h-36 tv:max-w-[1200px] tv-xl:h-40 tv-xl:max-h-40 tv-xl:max-w-[1340px]"
+              className="block h-[2.25rem] w-auto max-h-[2.25rem] max-w-[min(42vw,312px)] object-contain object-left sm:h-[2.7rem] sm:max-h-[2.7rem] sm:max-w-[min(39vw,372px)] md:h-[3.15rem] md:max-h-[3.15rem] md:max-w-[432px] lg:h-[3.6rem] lg:max-h-[3.6rem] lg:max-w-[492px] xl:h-[4.2rem] xl:max-h-[4.2rem] xl:max-w-[564px] 2xl:h-[4.8rem] 2xl:max-h-[4.8rem] 2xl:max-w-[636px] tv:h-[5.4rem] tv:max-h-[5.4rem] tv:max-w-[720px] tv-xl:h-24 tv-xl:max-h-24 tv-xl:max-w-[804px]"
             />
           </Link>
 
