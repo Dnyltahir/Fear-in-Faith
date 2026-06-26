@@ -72,7 +72,7 @@ export function JoinModal({ open, onOpenChange }: Props) {
                     </span>
                   </p>
                   <h2 id="join-title" className="text-2xl font-black text-slate-900">
-                    Join DAWA-HI — always free
+                    Join Fear to Faith — always free
                   </h2>
                 </div>
               </div>
@@ -211,7 +211,7 @@ export function JoinModal({ open, onOpenChange }: Props) {
                     <PartyPopper className="mx-auto size-12 text-[#FFDE59] drop-shadow-[0_1px_2px_rgba(15,23,42,0.35)]" />
                     <p className="text-2xl font-black text-slate-900">You&apos;re in!</p>
                     <p className="text-lg text-slate-600">
-                      Your DAWA-HI space is free forever. Be kind, ask big questions,
+                      Your Fear to Faith space is free forever. Be kind, ask big questions,
                       and use Report if something feels off.
                     </p>
                     <button

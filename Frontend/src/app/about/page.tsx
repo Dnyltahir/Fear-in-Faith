@@ -3,8 +3,8 @@ import { MessageCircle, Sparkles, Tv } from "lucide-react";
 import { PageContainer } from "@/components/page-container";
 
 export const metadata = {
-  title: "About · DAWA-HI",
-  description: "Learn about DAWA-HI and the Fear to Faith family experience.",
+  title: "About · Fear to Faith",
+  description: "Learn about the Fear to Faith family experience.",
 };
 
 const FEATURES = [
@@ -32,10 +32,10 @@ export default function AboutPage() {
         <div className="surface-card__body">
           <p className="type-label font-semibold text-[#9440DD]">About</p>
           <h1 className="type-h1 mt-2 font-black text-slate-900">
-            DAWA-HI · Fear to Faith
+            Fear to Faith
           </h1>
           <p className="type-body-lg mt-5 max-w-3xl text-slate-700">
-            DAWA-HI is a gentle home for families exploring faith together. We
+            Fear to Faith is a gentle home for families exploring faith together. We
             combine IQRA storytelling with a moderated Safe Space where children
             and parents can ask big questions and hear from verified guides.
           </p>

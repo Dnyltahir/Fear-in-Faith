@@ -3,8 +3,8 @@ import { Mail, MapPin } from "lucide-react";
 import { PageContainer } from "@/components/page-container";
 
 export const metadata = {
-  title: "Contact Us · DAWA-HI",
-  description: "Get in touch with the DAWA-HI team.",
+  title: "Contact Us · Fear to Faith",
+  description: "Get in touch with the Fear to Faith team.",
 };
 
 export default function ContactPage() {
@@ -17,7 +17,7 @@ export default function ContactPage() {
             We&apos;d love to hear from you
           </h1>
           <p className="type-body-lg mt-5 max-w-3xl text-slate-700">
-            Questions about IQRA, Safe Space, or partnering with DAWA-HI?
+            Questions about IQRA, Safe Space, or partnering with Fear to Faith?
             Send us a note and a member of our team will respond when they can.
           </p>
 

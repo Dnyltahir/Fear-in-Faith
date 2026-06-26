@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "DAWA-HI",
+  title: "Fear to Faith",
   description: "IQRA streaming and a gentle Q&A space for families.",
 };
 
