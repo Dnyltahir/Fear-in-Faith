@@ -34,7 +34,7 @@ export function SiteHeader() {
         <div className="site-container relative grid h-[var(--site-header-height)] grid-cols-[1fr_auto_1fr] items-center gap-3 md:gap-5">
           <Link
             href="/"
-            className="relative z-10 flex h-full items-center justify-self-start"
+            className="relative z-10 flex h-full min-w-0 items-center justify-self-start gap-2 sm:gap-3"
             aria-label="DAWA-HI home"
           >
             <Image
@@ -44,8 +44,20 @@ export function SiteHeader() {
               height={4321}
               priority
               unoptimized
-              className="block h-12 w-auto max-h-12 object-contain object-left sm:h-14 sm:max-h-14 md:h-16 md:max-h-16 lg:h-[4.5rem] lg:max-h-[4.5rem] xl:h-20 xl:max-h-20 2xl:h-[5.5rem] 2xl:max-h-[5.5rem] tv:h-24 tv:max-h-24 tv-xl:h-28 tv-xl:max-h-28"
+              className="block h-12 w-auto max-h-12 shrink-0 object-contain sm:h-14 sm:max-h-14 md:h-16 md:max-h-16 lg:h-[4.5rem] lg:max-h-[4.5rem] xl:h-20 xl:max-h-20 2xl:h-[5.5rem] 2xl:max-h-[5.5rem] tv:h-24 tv:max-h-24 tv-xl:h-28 tv-xl:max-h-28"
             />
+            {/* Wordmark D is the same ? as icon@4x — clip it off so we don't show two icons */}
+            <span className="relative inline-flex h-[2.25rem] max-w-[min(36vw,260px)] overflow-hidden sm:h-[2.7rem] sm:max-w-[min(34vw,300px)] md:h-[3.15rem] md:max-w-[360px] lg:h-[3.6rem] lg:max-w-[400px] xl:h-[4.2rem] xl:max-w-[460px] 2xl:h-[4.8rem] 2xl:max-w-[520px] tv:h-[5.4rem] tv:max-w-[580px] tv-xl:h-24 tv-xl:max-w-[640px]">
+              <Image
+                src="/images/wordmark.png"
+                alt="DAWA-HI"
+                width={4320}
+                height={4321}
+                priority
+                unoptimized
+                className="block h-full w-auto max-w-none -translate-x-[17%] scale-[1.08] object-left sm:-translate-x-[16%] md:-translate-x-[15%]"
+              />
+            </span>
           </Link>
 
           <nav
@@ -65,21 +77,7 @@ export function SiteHeader() {
             })}
           </nav>
 
-          <Link
-            href="/"
-            className="relative z-10 flex h-full min-w-0 items-center justify-self-end"
-            aria-label="DAWA-HI"
-          >
-            <Image
-              src="/images/wordmark.png"
-              alt="DAWA-HI"
-              width={4320}
-              height={4321}
-              priority
-              unoptimized
-              className="block h-[2.25rem] w-auto max-h-[2.25rem] max-w-[min(42vw,312px)] object-contain object-right sm:h-[2.7rem] sm:max-h-[2.7rem] sm:max-w-[min(39vw,372px)] md:h-[3.15rem] md:max-h-[3.15rem] md:max-w-[432px] lg:h-[3.6rem] lg:max-h-[3.6rem] lg:max-w-[492px] xl:h-[4.2rem] xl:max-h-[4.2rem] xl:max-w-[564px] 2xl:h-[4.8rem] 2xl:max-h-[4.8rem] 2xl:max-w-[636px] tv:h-[5.4rem] tv:max-h-[5.4rem] tv:max-w-[720px] tv-xl:h-24 tv-xl:max-h-24 tv-xl:max-w-[804px]"
-            />
-          </Link>
+          <div className="justify-self-end" aria-hidden />
         </div>
       </header>
       <div
