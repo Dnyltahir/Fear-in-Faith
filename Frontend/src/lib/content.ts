@@ -242,9 +242,8 @@ export const WATCH_BY_SLUG: Record<WatchSlug, WatchEpisode> = {
   "prayer-to-search-online": {
     slug: "prayer-to-search-online",
     title: "Search Online",
-    synopsis: "After prayer, you searched online and walked to the library.",
+    synopsis: "After prayer, you searched online and went to the library.",
     videoSrc: VIDEO_FILES.prayerToSearchOnline,
-    videoSequence: [VIDEO_FILES.libraryWalk],
     afterChoices: UNCLE_SAMI_CHOICES_RESEARCH,
   },
   "sleep-search-online": {

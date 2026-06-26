@@ -23,7 +23,7 @@ Episode files in this folder are served at `/videos/...` and are **included in g
 - `Baba Situation 2.mp4`
 - **WATCHES YOUTUBE:** `Watching Cartoons.mp4` → `Library Walk.mp4` → Uncle Sami choices (library path)
 - **SLEEP:** `Dream Scene.mp4`
-  - **Allah for guidance:** `Prayer.mp4` → **Go to library:** `Prayer to Library.mp4` | **Search Online:** `Prayer to Search Online.mp4` → `Library Walk.mp4` → Uncle Sami (research path)
+  - **Allah for guidance:** `Prayer.mp4` → **Go to library:** `Prayer to Library.mp4` | **Search Online:** `Prayer to Search Online.mp4` → Uncle Sami (research path)
   - **Search online:** `Dream Guide to Search Online.mp4` → `Library Walk.mp4` → Uncle Sami (research path)
 
 ## End credits
