@@ -37,10 +37,10 @@ export function SiteHeader() {
             className="relative z-10 flex h-full min-w-0 items-center justify-self-start"
           >
             <Image
-              src="/images/fear-to-faith-wordmark.jpg"
+              src="/images/title@4x.png"
               alt="Fear to Faith"
-              width={1024}
-              height={192}
+              width={6928}
+              height={1299}
               priority
               className="block h-[3.75rem] w-auto max-h-[3.75rem] max-w-[min(70vw,520px)] object-contain object-left sm:h-[4.5rem] sm:max-h-[4.5rem] sm:max-w-[min(65vw,620px)] md:h-[5.25rem] md:max-h-[5.25rem] md:max-w-[720px] lg:h-24 lg:max-h-24 lg:max-w-[820px] xl:h-28 xl:max-h-28 xl:max-w-[940px] 2xl:h-32 2xl:max-h-32 2xl:max-w-[1060px] tv:h-36 tv:max-h-36 tv:max-w-[1200px] tv-xl:h-40 tv-xl:max-h-40 tv-xl:max-w-[1340px]"
             />
