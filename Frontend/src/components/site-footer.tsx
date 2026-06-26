@@ -24,7 +24,7 @@ export function SiteFooter() {
               <div className="min-w-0 max-w-lg">
                 <p className="type-label font-semibold text-[#9440DD]">About</p>
                 <h2 className="type-h2 mt-1 font-black text-slate-900">
-                  Fear to Faith
+                  DAWA-HI · Fear to Faith
                 </h2>
                 <p className="type-body mt-2 text-slate-600">
                   A gentle space for families — IQRA stories, scholar chat, and
@@ -61,7 +61,7 @@ export function SiteFooter() {
           </div>
 
           <p className="type-label border-t border-slate-100 bg-slate-50/90 px-5 py-3 text-center font-medium normal-case tracking-normal text-slate-500">
-            © {new Date().getFullYear()} Fear to Faith · Made with care for curious hearts
+            © {new Date().getFullYear()} DAWA-HI · Made with care for curious hearts
           </p>
         </div>
       </div>
