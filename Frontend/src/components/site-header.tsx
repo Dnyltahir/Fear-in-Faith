@@ -35,17 +35,17 @@ export function SiteHeader() {
         <div className="site-header__accent" aria-hidden />
 
         <div className="site-header__bar site-container">
-          {/* Left — question-mark icon */}
+          {/* Left — DAWA-HI wordmark */}
           <div className="site-header__slot site-header__slot--start">
-            <Link href="/" className="site-header__icon-link" aria-label="DAWA-HI home">
+            <Link href="/" className="site-header__wordmark-link" aria-label="DAWA-HI">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={ICON_SRC}
-                alt=""
+                src={WORDMARK_SRC}
+                alt="DAWA-HI"
                 width={4320}
                 height={4321}
                 decoding="async"
-                className="site-header__icon"
+                className="site-header__wordmark"
                 draggable={false}
               />
             </Link>
@@ -66,17 +66,17 @@ export function SiteHeader() {
             })}
           </nav>
 
-          {/* Right — DAWA-HI wordmark */}
+          {/* Right — question-mark icon */}
           <div className="site-header__slot site-header__slot--end">
-            <Link href="/" className="site-header__wordmark-link" aria-label="DAWA-HI">
+            <Link href="/" className="site-header__icon-link" aria-label="DAWA-HI home">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={WORDMARK_SRC}
-                alt="DAWA-HI"
+                src={ICON_SRC}
+                alt=""
                 width={4320}
                 height={4321}
                 decoding="async"
-                className="site-header__wordmark"
+                className="site-header__icon"
                 draggable={false}
               />
             </Link>
