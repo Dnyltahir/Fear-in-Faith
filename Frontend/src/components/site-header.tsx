@@ -31,23 +31,25 @@ export function SiteHeader() {
         )}
       >
         <div className="h-0.5 bg-gradient-to-r from-[#9440DD] via-[#FFDE59] to-[#9440DD]" aria-hidden />
-        <div className="site-container flex h-[var(--site-header-height)] items-center justify-between gap-3 md:gap-5">
+        <div className="site-container relative grid h-[var(--site-header-height)] grid-cols-[1fr_auto_1fr] items-center gap-3 md:gap-5">
           <Link
             href="/"
-            className="relative z-10 flex h-full min-w-0 items-center"
+            className="relative z-10 flex h-full items-center justify-self-start"
+            aria-label="DAWA-HI home"
           >
             <Image
-              src="/images/title@4x.png"
-              alt="Fear to Faith"
-              width={6928}
-              height={1299}
+              src="/images/icon@4x.png"
+              alt=""
+              width={4320}
+              height={4321}
               priority
-              className="block h-[2.25rem] w-auto max-h-[2.25rem] max-w-[min(42vw,312px)] object-contain object-left sm:h-[2.7rem] sm:max-h-[2.7rem] sm:max-w-[min(39vw,372px)] md:h-[3.15rem] md:max-h-[3.15rem] md:max-w-[432px] lg:h-[3.6rem] lg:max-h-[3.6rem] lg:max-w-[492px] xl:h-[4.2rem] xl:max-h-[4.2rem] xl:max-w-[564px] 2xl:h-[4.8rem] 2xl:max-h-[4.8rem] 2xl:max-w-[636px] tv:h-[5.4rem] tv:max-h-[5.4rem] tv:max-w-[720px] tv-xl:h-24 tv-xl:max-h-24 tv-xl:max-w-[804px]"
+              unoptimized
+              className="block h-12 w-auto max-h-12 object-contain object-left sm:h-14 sm:max-h-14 md:h-16 md:max-h-16 lg:h-[4.5rem] lg:max-h-[4.5rem] xl:h-20 xl:max-h-20 2xl:h-[5.5rem] 2xl:max-h-[5.5rem] tv:h-24 tv:max-h-24 tv-xl:h-28 tv-xl:max-h-28"
             />
           </Link>
 
           <nav
-            className="relative z-20 flex shrink-0 items-center rounded-xl bg-slate-100/90 p-1 ring-1 ring-slate-200/80 md:rounded-2xl md:p-1.5"
+            className="relative z-20 flex items-center justify-self-center rounded-xl bg-slate-100/90 p-1 ring-1 ring-slate-200/80 md:rounded-2xl md:p-1.5"
             aria-label="Main"
           >
             {NAV.map(({ href, label }) => {
@@ -62,6 +64,22 @@ export function SiteHeader() {
               );
             })}
           </nav>
+
+          <Link
+            href="/"
+            className="relative z-10 flex h-full min-w-0 items-center justify-self-end"
+            aria-label="DAWA-HI"
+          >
+            <Image
+              src="/images/wordmark.png"
+              alt="DAWA-HI"
+              width={4320}
+              height={4321}
+              priority
+              unoptimized
+              className="block h-[2.25rem] w-auto max-h-[2.25rem] max-w-[min(42vw,312px)] object-contain object-right sm:h-[2.7rem] sm:max-h-[2.7rem] sm:max-w-[min(39vw,372px)] md:h-[3.15rem] md:max-h-[3.15rem] md:max-w-[432px] lg:h-[3.6rem] lg:max-h-[3.6rem] lg:max-w-[492px] xl:h-[4.2rem] xl:max-h-[4.2rem] xl:max-w-[564px] 2xl:h-[4.8rem] 2xl:max-h-[4.8rem] 2xl:max-w-[636px] tv:h-[5.4rem] tv:max-h-[5.4rem] tv:max-w-[720px] tv-xl:h-24 tv-xl:max-h-24 tv-xl:max-w-[804px]"
+            />
+          </Link>
         </div>
       </header>
       <div
