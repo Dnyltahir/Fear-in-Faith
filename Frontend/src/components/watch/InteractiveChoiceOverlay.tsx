@@ -1,22 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { BookOpen, MessagesSquare } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import type { AfterChoice } from "@/lib/content";
 import { cn } from "@/lib/utils";
 import { ChoiceTimerBar } from "@/components/watch/ChoiceTimerBar";
 
 const CHOICE_SECONDS = 18;
-
-function ChoiceIcon({ type, className }: { type: AfterChoice["icon"]; className?: string }) {
-  const cls = cn(
-    "choice-box__icon size-9 shrink-0 sm:size-10 lg:size-11 tv:size-[3.25rem]",
-    className,
-  );
-  if (type === "book") return <BookOpen className={cls} strokeWidth={2.25} aria-hidden />;
-  return <MessagesSquare className={cls} strokeWidth={2.25} aria-hidden />;
-}
 
 type Props = {
   choices: AfterChoice[];
@@ -97,8 +87,7 @@ export function InteractiveChoiceOverlay({ choices, onSelect }: Props) {
                 )}
               >
                 <span className="choice-box__face">
-                  <ChoiceIcon type={choice.icon} />
-                  <span className="min-w-0 sm:flex-1">
+                  <span className="min-w-0">
                     <span className="choice-box__label block text-base font-black leading-tight sm:text-lg lg:text-xl tv:text-2xl">
                       {choice.label}
                     </span>

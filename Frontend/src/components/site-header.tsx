@@ -34,15 +34,15 @@ export function SiteHeader() {
         <div className="site-container flex h-[var(--site-header-height)] items-center justify-between gap-3 md:gap-5">
           <Link
             href="/"
-            className="flex h-full min-w-0 shrink-0 items-center md:max-w-[50%]"
+            className="flex h-full min-w-0 flex-1 items-center justify-start md:max-w-[58%]"
           >
             <Image
               src="/images/wordmark.png"
               alt="DAWA-HI"
-              width={520}
-              height={128}
+              width={720}
+              height={180}
               priority
-              className="block h-14 w-auto max-h-14 max-w-[min(62vw,300px)] object-contain object-left sm:h-16 sm:max-h-16 sm:max-w-[340px] md:h-[4.25rem] md:max-h-[4.25rem] md:max-w-[400px] lg:h-[4.75rem] lg:max-h-[4.75rem] lg:max-w-[460px] xl:h-20 xl:max-h-20 xl:max-w-[520px] 2xl:h-[5.5rem] 2xl:max-h-[5.5rem] 2xl:max-w-[580px] tv:h-24 tv:max-h-24 tv:max-w-[680px] tv-xl:h-28 tv-xl:max-h-28 tv-xl:max-w-[780px]"
+              className="block h-[3.25rem] w-auto max-h-[3.25rem] max-w-[min(78vw,420px)] object-contain object-left sm:h-[3.75rem] sm:max-h-[3.75rem] sm:max-w-[min(72vw,480px)] md:h-[4.5rem] md:max-h-[4.5rem] md:max-w-[540px] lg:h-20 lg:max-h-20 lg:max-w-[620px] xl:h-[5.5rem] xl:max-h-[5.5rem] xl:max-w-[700px] 2xl:h-24 2xl:max-h-24 2xl:max-w-[780px] tv:h-28 tv:max-h-28 tv:max-w-[900px] tv-xl:h-32 tv-xl:max-h-32 tv-xl:max-w-[1000px]"
             />
           </Link>
 
@@ -62,20 +62,6 @@ export function SiteHeader() {
               );
             })}
           </nav>
-
-          <Link
-            href="/"
-            className="flex h-full shrink-0 items-center rounded-xl p-1 transition-opacity hover:opacity-85 md:rounded-2xl"
-            aria-label="DAWA-HI home"
-          >
-            <Image
-              src="/images/icon.png"
-              alt=""
-              width={72}
-              height={72}
-              className="block size-11 object-contain sm:size-12 md:size-14 lg:size-16 2xl:size-[4.5rem] tv:size-20 tv-xl:size-24"
-            />
-          </Link>
         </div>
       </header>
       <div
